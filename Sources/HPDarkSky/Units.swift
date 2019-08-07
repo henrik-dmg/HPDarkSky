@@ -8,7 +8,6 @@
 import Foundation
 
 public enum Units: String {
-    case auto
     case imperial = "us"
     case metric = "si"
 }

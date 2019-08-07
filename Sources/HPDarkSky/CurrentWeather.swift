@@ -18,7 +18,7 @@ public struct CurrentWeather: Codable {
     let dewPoint: Double
     let humidity: Double
     let pressure: Double
-    //let wind: Wind
+    let wind: Wind
     let cloudCover: Double
     let uvIndex: Int
     let visibility: Double
@@ -35,7 +35,7 @@ public struct CurrentWeather: Codable {
         case dewPoint
         case humidity
         case pressure
-        //case wind
+        case wind
         case cloudCover
         case uvIndex
         case visibility
@@ -65,31 +65,11 @@ public struct CurrentWeather: Codable {
             error: try precipContainer.decodeIfPresent(Double.self, forKey: .error),
             probability: try precipContainer.decode(Double.self, forKey: .probability),
             type: try precipContainer.decode(String.self, forKey: .type))
-    }
-}
-
-public struct Precipitation: Codable {
-    let intensity: Double
-    let error: Double?
-    let probability: Double
-    let type: String
-    
-    enum CodingKeys: String, CodingKey {
-        case intensity = "precipIntensity"
-        case error = "precipIntensityError"
-        case probability = "precipProbability"
-        case type = "precipType"
-    }
-}
-
-public struct Wind: Codable {
-    let speed: Double
-    let gust: Double
-    let bearing: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case speed = "windSpeed"
-        case gust = "windGust"
-        case bearing = "windBearing"
+        
+        let windContainer = try decoder.container(keyedBy: Wind.CodingKeys.self)
+        self.wind = Wind(
+            speed: try windContainer.decode(Double.self, forKey: .speed),
+            gust: try windContainer.decode(Double.self, forKey: .gust),
+            bearing: try windContainer.decode(Int.self, forKey: .bearing))
     }
 }

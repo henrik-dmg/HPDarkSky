@@ -3,19 +3,19 @@ import CoreLocation
 
 public final class HPDarkSky {
 
-    public static let shared = HPDarkSky()
+    public static let shared = HPDarkSky(secret: nil)
 
     public var language: Language = .english
-    public var units: Units = .auto
+    public var units: Units = .metric
     public var secret: String?
 
-    public init(secret: String? = nil, language: Language = .english, units: Units = .auto) {
+    public init(secret: String?, language: Language = .english, units: Units = .metric) {
         self.secret = secret
         self.language = language
         self.units = units
     }
     
-    public func request(_ request: DarkSkyRequest, completion: @escaping (Forecast?, Error?) -> Void) {
+    public func performRequest(_ request: DarkSkyRequest, completion: @escaping (Forecast?, Error?) -> Void) {
         guard let secret = secret else {
             completion(nil, NSError.missingSecret as Error)
             return
