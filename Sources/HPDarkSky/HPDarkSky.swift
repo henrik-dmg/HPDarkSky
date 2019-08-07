@@ -45,12 +45,11 @@ public final class HPDarkSky {
         }.resume()
     }
     
-    private func buildURL(for secret: String, location: CLLocationCoordinate2D, excludedFields: [ExcludableFields]? = nil) -> URL {
+    internal func buildURL(for secret: String, location: CLLocationCoordinate2D, excludedFields: [ExcludableFields]? = nil) -> URL {
         var baseURL = DarkSkyRequest.baseURL
         baseURL.appendPathComponent(secret)
-        baseURL.appendPathComponent(String(location.latitude))
-        baseURL.appendPathComponent(String(location.longitude))
-        
+        baseURL.appendPathComponent("\(location.latitude),\(location.longitude)")
+
         return baseURL
     }
     
