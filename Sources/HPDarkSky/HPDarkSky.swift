@@ -32,6 +32,10 @@ public final class HPDarkSky {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .secondsSince1970
 
+                #if DEBUG
+                print(json.json())
+                #endif
+                
                 let forecast = try decoder.decode(Forecast.self, from: json)
 
                 completion(forecast, error)
@@ -87,6 +91,18 @@ public final class HPDarkSky {
 //            }
 //        }.resume()
 //    }
+}
+
+extension Data {
+    func json() -> [String:Any]? {
+        let model = try? JSONSerialization.jsonObject(with: self, options: [])
+
+        if let json = model as? [String:Any] {
+            return json
+        }
+        
+        return nil
+    }
 }
 
 private extension NSError {
