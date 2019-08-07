@@ -62,7 +62,7 @@ public struct CurrentWeather: Codable {
         let precipContainer = try decoder.container(keyedBy: Precipitation.CodingKeys.self)
         self.precipitation = Precipitation(
             intensity: try precipContainer.decode(Double.self, forKey: .intensity),
-            error: try precipContainer.decode(Double.self, forKey: .error),
+            error: try precipContainer.decodeIfPresent(Double.self, forKey: .error),
             probability: try precipContainer.decode(Double.self, forKey: .probability),
             type: try precipContainer.decode(String.self, forKey: .type))
     }
@@ -70,7 +70,7 @@ public struct CurrentWeather: Codable {
 
 public struct Precipitation: Codable {
     let intensity: Double
-    let error: Double
+    let error: Double?
     let probability: Double
     let type: String
     
