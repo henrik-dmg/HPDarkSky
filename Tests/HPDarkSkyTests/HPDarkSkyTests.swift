@@ -5,8 +5,12 @@ import CoreLocation
 final class HPDarkSkyTests: XCTestCase {
     
     func makeRequestObject() -> DarkSkyRequest {
+        guard let envSecret = TestSecret.secret else {
+            fatalError("Could not find secret")
+            
+        }
         return DarkSkyRequest(
-            secret: TestSecret.secret,
+            secret: envSecret,
             location: CLLocationCoordinate2D(latitude: 50.12312, longitude: -12.12912),
             excludedFields: ExcludableFields.allCases)
     }
