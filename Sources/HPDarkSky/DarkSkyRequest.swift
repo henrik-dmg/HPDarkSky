@@ -32,7 +32,7 @@ public struct DarkSkyRequest {
         return components.url
     }
     
-    internal func makeQueryItems() -> [URLQueryItem] {
+    private func makeQueryItems() -> [URLQueryItem] {
         var items = [URLQueryItem]()
         if !excludedFields.isEmpty {
             let excludedItem = URLQueryItem(name: "excluded", value: excludedFields.compactMap({$0.rawValue}).joined(separator: ","))
