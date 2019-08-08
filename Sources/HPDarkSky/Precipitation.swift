@@ -8,6 +8,9 @@
 import Foundation
 
 public struct Precipitation: Codable {
+    
+    static let none = Precipitation(intensity: 0, error: 0, probability: 0, type: "none")
+
     let intensity: Double
     let error: Double?
     let probability: Double
@@ -18,5 +21,14 @@ public struct Precipitation: Codable {
         case error = "precipIntensityError"
         case probability = "precipProbability"
         case type = "precipType"
+    }
+    
+    public static func decode(from decoder: Decoder) throws -> Precipitation {
+        let precipContainer = try decoder.container(keyedBy: CodingKeys.self)
+        return Precipitation(
+            intensity: try precipContainer.decode(Double.self, forKey: .intensity),
+            error: try precipContainer.decodeIfPresent(Double.self, forKey: .error),
+            probability: try precipContainer.decode(Double.self, forKey: .probability),
+            type: try precipContainer.decode(String.self, forKey: .type))
     }
 }

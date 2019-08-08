@@ -16,21 +16,39 @@ final class HPDarkSkyTests: XCTestCase {
         HPDarkSky.shared.secret = nil
     }
     
+    func makeRequestObject() -> DarkSkyRequest {
+        return DarkSkyRequest(secret: HPDarkSky.shared.secret!, location: CLLocationCoordinate2D(latitude: 50.12312, longitude: -12.12912), excludedFields: ExcludableFields.allCases)
+    }
+    
     func testExcludingCurrently() {
-        let request = DarkSkyRequest(secret: HPDarkSky.shared.secret!, location: CLLocationCoordinate2D(latitude: 50.12312, longitude: -12.12912), excludedFields: ExcludableFields.allCases)
+        let request = makeRequestObject()
         let exp = expectation(description: "fetched data from server")
         
         HPDarkSky.shared.performRequest(request) { (forecast, error) in
             exp.fulfill()
-            print(error?.localizedDescription)
+            XCTAssertNil(forecast?.currently)
+            XCTAssertNil(error)
+        }
+        
+        wait(for: [exp], timeout: 10)
+    }
+    
+    func testBasicRequest() {
+        var request = makeRequestObject()
+        request.excludedFields = ExcludableFields.allCases.filter({$0 != .currently})
+        let exp = expectation(description: "fetched data from server")
+        
+        HPDarkSky.shared.performRequest(request) { (forecast, error) in
+            exp.fulfill()
             XCTAssertNotNil(forecast?.currently)
             XCTAssertNil(error)
         }
         
-        wait(for: [exp], timeout: 5)
+        wait(for: [exp], timeout: 10)
     }
     
     static var allTests = [
-        "testBasicRequest": testExcludingCurrently
+        "testBasicRequest": testBasicRequest,
+        "testExcludingCurrently": testExcludingCurrently
     ]
 }

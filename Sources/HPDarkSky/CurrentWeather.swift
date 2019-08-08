@@ -58,19 +58,7 @@ public struct CurrentWeather: Codable {
         self.uvIndex = try container.decode(Int.self, forKey: .uvIndex)
         self.visibility = try container.decode(Double.self, forKey: .visibility)
         self.ozone = try container.decode(Double.self, forKey: .ozone)
-        
-        let precipContainer = try decoder.container(keyedBy: Precipitation.CodingKeys.self)
-        self.precipitation = Precipitation(
-            intensity: try precipContainer.decode(Double.self, forKey: .intensity),
-            error: try precipContainer.decodeIfPresent(Double.self, forKey: .error),
-            probability: try precipContainer.decode(Double.self, forKey: .probability),
-            type: try precipContainer.decode(String.self, forKey: .type))
-        
-        let windContainer = try decoder.container(keyedBy: Wind.CodingKeys.self)
-        self.wind = Wind(
-            speed: try windContainer.decode(Double.self, forKey: .speed),
-            gust: try windContainer.decode(Double.self, forKey: .gust),
-            bearing: try windContainer.decode(Int.self, forKey: .bearing),
-            gustTime: try windContainer.decodeIfPresent(Date.self, forKey: .gustTime))
+        self.wind = try Wind.decode(from: decoder)
+        self.precipitation = try Precipitation.decode(from: decoder)
     }
 }
