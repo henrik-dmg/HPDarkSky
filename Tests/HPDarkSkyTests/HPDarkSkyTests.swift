@@ -11,7 +11,7 @@ final class HPDarkSkyTests: XCTestCase {
         }
         return DarkSkyRequest(
             secret: envSecret,
-            location: CLLocationCoordinate2D(latitude: 50.12312, longitude: -12.12912),
+            location: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
             excludedFields: ExcludableFields.allCases)
     }
 
@@ -38,7 +38,23 @@ final class HPDarkSkyTests: XCTestCase {
         let exp = expectation(description: "fetched current data from server")
 
         HPDarkSky.shared.performRequest(request) { (forecast, error) in
+            XCTAssertNotNil(forecast)
             XCTAssertNotNil(forecast?.currently)
+            XCTAssertNil(error)
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testMinutelyRequest() {
+        var request = makeRequestObject()
+        request.excludedFields = ExcludableFields.allCases.filter({$0 != .minutely})
+        let exp = expectation(description: "fetched minutely data from server")
+
+        HPDarkSky.shared.performRequest(request) { (forecast, error) in
+            XCTAssertNotNil(forecast)
+            XCTAssertNotNil(forecast?.minutely)
             XCTAssertNil(error)
             exp.fulfill()
         }
@@ -49,6 +65,7 @@ final class HPDarkSkyTests: XCTestCase {
     static var allTests = [
         "testSecretExistsInEnvironment": testSecretExistsInEnvironment,
         "testBasicRequest": testBasicRequest,
-        "testExcludingCurrently": testExcludingCurrently
+        "testExcludingCurrently": testExcludingCurrently,
+        "testMinutelyRequest": testMinutelyRequest
     ]
 }

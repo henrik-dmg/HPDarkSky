@@ -16,7 +16,7 @@ public struct DarkSkyRequest {
     public var units: Units = .metric
     private let secret: String
 
-    public init(secret: String, location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = []) {
+    public init(secret: String, location: CLLocationCoordinate2D, date: Date? = nil, excludedFields: [ExcludableFields] = []) {
         self.secret = secret
         self.excludedFields = excludedFields
         self.location = location

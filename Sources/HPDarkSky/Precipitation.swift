@@ -14,7 +14,7 @@ public struct Precipitation: Codable {
     let intensity: Double
     let error: Double?
     let probability: Double
-    let type: String
+    let type: String?
 
     enum CodingKeys: String, CodingKey {
         case intensity = "precipIntensity"
@@ -29,6 +29,6 @@ public struct Precipitation: Codable {
             intensity: try precipContainer.decode(Double.self, forKey: .intensity),
             error: try precipContainer.decodeIfPresent(Double.self, forKey: .error),
             probability: try precipContainer.decode(Double.self, forKey: .probability),
-            type: try precipContainer.decode(String.self, forKey: .type))
+            type: try precipContainer.decodeIfPresent(String.self, forKey: .type))
     }
 }
