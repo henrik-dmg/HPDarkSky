@@ -7,7 +7,7 @@ final class HPDarkSkyTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        HPDarkSky.shared.secret = "296a22af3e54045f710c0555cd081857"
+        HPDarkSky.shared.secret = TestSecret.secret
     }
     
     override func tearDown() {
