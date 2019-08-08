@@ -23,7 +23,7 @@ public struct CurrentWeather: Codable {
     let uvIndex: Int
     let visibility: Double
     let ozone: Double
-    
+
     enum CodingKeys: String, CodingKey {
         case timeStamp = "time"
         case summary
@@ -41,7 +41,7 @@ public struct CurrentWeather: Codable {
         case visibility
         case ozone
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 

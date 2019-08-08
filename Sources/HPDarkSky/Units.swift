@@ -10,6 +10,6 @@ import Foundation
 public enum Units: String {
     case imperial = "us"
     case metric = "si"
-    
+
     static let `default`: Units = .metric
 }

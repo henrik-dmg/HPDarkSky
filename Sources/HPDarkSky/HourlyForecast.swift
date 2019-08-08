@@ -21,5 +21,5 @@ public struct HourlyDataPoint: Codable {
     let apparentTemperature: Double
     let dewPoint: Double
     let humidity: Double
-    
+
 }

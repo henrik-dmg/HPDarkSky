@@ -10,7 +10,7 @@ import Foundation
 public struct APIError: Codable {
     let code: Int
     let error: String
-    
+
     internal func makeNSError() -> NSError {
         return NSError(description: error, code: code)
     }

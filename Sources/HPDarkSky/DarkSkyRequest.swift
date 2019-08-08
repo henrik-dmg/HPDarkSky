@@ -15,13 +15,13 @@ public struct DarkSkyRequest {
     public var language: Language = .english
     public var units: Units = .metric
     private let secret: String
-    
+
     public init(secret: String, location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = []) {
         self.secret = secret
         self.excludedFields = excludedFields
         self.location = location
     }
-    
+
     public func constructURL() -> URL? {
         var components = URLComponents()
         components.scheme = "https"
@@ -30,17 +30,17 @@ public struct DarkSkyRequest {
         components.queryItems = makeQueryItems()
         return components.url
     }
-    
+
     private func makeQueryItems() -> [URLQueryItem] {
         var items = [URLQueryItem]()
         if !excludedFields.isEmpty {
             let excludedItem = URLQueryItem(name: "exclude", value: excludedFields.compactMap({$0.rawValue}).joined(separator: ","))
             items.append(excludedItem)
         }
-        
+
         items.append(URLQueryItem(name: "lang", value: language.rawValue))
         items.append(URLQueryItem(name: "units", value: units.rawValue))
-        
+
         return items
     }
 }

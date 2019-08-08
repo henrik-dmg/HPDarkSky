@@ -14,24 +14,37 @@ public final class HPDarkSky {
         self.language = language
         self.units = units
     }
-    
+
     public func performRequest(_ request: DarkSkyRequest, completion: @escaping (Forecast?, Error?) -> Void) {
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        hitEndpoint(with: request, completion: completion)
+    }
+
+    public func requestWeather(forLocation location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = [], completion: @escaping (Forecast?, Error?) -> Void) {
+        guard let secret = self.secret else {
+            completion(nil, NSError.missingSecret)
+            return
+        }
+        let request = DarkSkyRequest(secret: secret, location: location, excludedFields: excludedFields)
+        hitEndpoint(with: request, completion: completion)
+    }
+
+    private func hitEndpoint(with request: DarkSkyRequest, completion: @escaping (Forecast?, Error?) -> Void) {
+        URLSession.shared.dataTask(with: request) { data, _, error in
             guard let json = data, error == nil else {
                 completion(nil, error)
                 return
             }
-            
+
             do {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .secondsSince1970
-                
+
                 //print(json.json())
 
                 if let apiError = try? decoder.decode(APIError.self, from: json) {
                     completion(nil, apiError.makeNSError())
                 }
-                
+
                 let forecast = try decoder.decode(Forecast.self, from: json)
 
                 completion(forecast, error)
@@ -40,7 +53,7 @@ public final class HPDarkSky {
             }
         }.resume()
     }
-    
+
     /**
      Private function to actually make the API calls
      
@@ -80,14 +93,15 @@ public final class HPDarkSky {
 //    }
 }
 
+// Felt cute, will delete later
 extension Data {
-    func json() -> [String:Any]? {
+    func json() -> [String: Any]? {
         let model = try? JSONSerialization.jsonObject(with: self, options: [])
 
-        if let json = model as? [String:Any] {
+        if let json = model as? [String: Any] {
             return json
         }
-        
+
         return nil
     }
 }
@@ -99,6 +113,6 @@ internal extension NSError {
             code: code,
             userInfo: [NSLocalizedDescriptionKey: description])
     }
-    
+
     static let missingSecret = NSError(description: "No API secret was found")
 }

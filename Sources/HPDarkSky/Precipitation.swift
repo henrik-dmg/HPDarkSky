@@ -8,21 +8,21 @@
 import Foundation
 
 public struct Precipitation: Codable {
-    
+
     static let none = Precipitation(intensity: 0, error: 0, probability: 0, type: "none")
 
     let intensity: Double
     let error: Double?
     let probability: Double
     let type: String
-    
+
     enum CodingKeys: String, CodingKey {
         case intensity = "precipIntensity"
         case error = "precipIntensityError"
         case probability = "precipProbability"
         case type = "precipType"
     }
-    
+
     public static func decode(from decoder: Decoder) throws -> Precipitation {
         let precipContainer = try decoder.container(keyedBy: CodingKeys.self)
         return Precipitation(

@@ -28,4 +28,12 @@ extension CLLocationCoordinate2D: Codable {
         longitude = try container.decode(Double.self, forKey: .longitude)
         latitude = try container.decode(Double.self, forKey: .latitude)
     }
+
+    public static func decode(from decoder: Decoder) throws -> CLLocationCoordinate2D {
+        let locationContainer = try decoder.container(keyedBy: CodingKeys.self)
+        return CLLocationCoordinate2D(
+            latitude: try locationContainer.decode(Double.self, forKey: .latitude),
+            longitude: try locationContainer.decode(Double.self, forKey: .longitude))
+
+    }
 }
