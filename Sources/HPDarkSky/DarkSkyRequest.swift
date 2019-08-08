@@ -28,14 +28,13 @@ public struct DarkSkyRequest {
         components.host = "api.darksky.net"
         components.path = "/forecast/\(secret)/\(location.latitude),\(location.longitude)"
         components.queryItems = makeQueryItems()
-        
         return components.url
     }
     
     private func makeQueryItems() -> [URLQueryItem] {
         var items = [URLQueryItem]()
         if !excludedFields.isEmpty {
-            let excludedItem = URLQueryItem(name: "excluded", value: excludedFields.compactMap({$0.rawValue}).joined(separator: ","))
+            let excludedItem = URLQueryItem(name: "exclude", value: excludedFields.compactMap({$0.rawValue}).joined(separator: ","))
             items.append(excludedItem)
         }
         

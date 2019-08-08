@@ -4,47 +4,38 @@ import CoreLocation
 
 final class HPDarkSkyTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        
-        HPDarkSky.shared.secret = TestSecret.secret
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-        
-        HPDarkSky.shared.secret = nil
-    }
-    
     func makeRequestObject() -> DarkSkyRequest {
-        return DarkSkyRequest(secret: HPDarkSky.shared.secret!, location: CLLocationCoordinate2D(latitude: 50.12312, longitude: -12.12912), excludedFields: ExcludableFields.allCases)
+        return DarkSkyRequest(
+            secret: TestSecret.secret,
+            location: CLLocationCoordinate2D(latitude: 50.12312, longitude: -12.12912),
+            excludedFields: ExcludableFields.allCases)
     }
     
     func testExcludingCurrently() {
         let request = makeRequestObject()
-        let exp = expectation(description: "fetched data from server")
+        let exp = expectation(description: "fetched empty forecast from server")
         
         HPDarkSky.shared.performRequest(request) { (forecast, error) in
-            exp.fulfill()
             XCTAssertNil(forecast?.currently)
             XCTAssertNil(error)
+            exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 10)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testBasicRequest() {
         var request = makeRequestObject()
         request.excludedFields = ExcludableFields.allCases.filter({$0 != .currently})
-        let exp = expectation(description: "fetched data from server")
-        
+        let exp = expectation(description: "fetched current data from server")
+
         HPDarkSky.shared.performRequest(request) { (forecast, error) in
-            exp.fulfill()
             XCTAssertNotNil(forecast?.currently)
             XCTAssertNil(error)
+            exp.fulfill()
         }
-        
-        wait(for: [exp], timeout: 10)
+
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     static var allTests = [
