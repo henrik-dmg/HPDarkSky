@@ -11,10 +11,12 @@ public struct Wind: Codable {
     let speed: Double
     let gust: Double
     let bearing: Int
+    let gustTime: Date?
     
     enum CodingKeys: String, CodingKey {
         case speed = "windSpeed"
         case gust = "windGust"
         case bearing = "windBearing"
+        case gustTime = "windGustTime"
     }
 }

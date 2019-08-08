@@ -44,7 +44,7 @@ public struct CurrentWeather: Codable {
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         self.timeStamp = try container.decode(Date.self, forKey: .timeStamp)
         self.summary = try container.decode(String.self, forKey: .summary)
         self.iconName = try container.decode(String.self, forKey: .iconName)
@@ -70,6 +70,7 @@ public struct CurrentWeather: Codable {
         self.wind = Wind(
             speed: try windContainer.decode(Double.self, forKey: .speed),
             gust: try windContainer.decode(Double.self, forKey: .gust),
-            bearing: try windContainer.decode(Int.self, forKey: .bearing))
+            bearing: try windContainer.decode(Int.self, forKey: .bearing),
+            gustTime: try windContainer.decodeIfPresent(Date.self, forKey: .gustTime))
     }
 }

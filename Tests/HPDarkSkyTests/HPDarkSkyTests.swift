@@ -16,25 +16,14 @@ final class HPDarkSkyTests: XCTestCase {
         HPDarkSky.shared.secret = nil
     }
     
-    func testURLBuilder() {
-        let mockSecret = "141029jsaiosdas90fh0319oiaenv98eqbf3ofbhqoawihfoiaeh"
-        HPDarkSky.shared.secret = mockSecret
-        let url = HPDarkSky.shared.buildURL(for: mockSecret, location: CLLocationCoordinate2D(latitude: 10.0, longitude: -10.12512))
-        let expectedURL = DarkSkyRequest.baseURL.absoluteString + "/\(mockSecret)/10.0,-10.12512"
-        
-        print(url.absoluteString)
-        
-        print(expectedURL)
-        XCTAssert(url.absoluteString == expectedURL)
-    }
-    
-    func testBasicRequest() {
-        let request = DarkSkyRequest(location: CLLocationCoordinate2D(latitude: 50.12312, longitude: -12.12912))
+    func testExcludingCurrently() {
+        let request = DarkSkyRequest(secret: HPDarkSky.shared.secret!, location: CLLocationCoordinate2D(latitude: 50.12312, longitude: -12.12912), excludedFields: ExcludableFields.allCases)
         let exp = expectation(description: "fetched data from server")
         
         HPDarkSky.shared.performRequest(request) { (forecast, error) in
             exp.fulfill()
-            XCTAssertNotNil(forecast)
+            print(error?.localizedDescription)
+            XCTAssertNotNil(forecast?.currently)
             XCTAssertNil(error)
         }
         
@@ -42,7 +31,6 @@ final class HPDarkSkyTests: XCTestCase {
     }
     
     static var allTests = [
-        "testURLBuilder": testURLBuilder,
-        "testBasicRequest": testBasicRequest
+        "testBasicRequest": testExcludingCurrently
     ]
 }

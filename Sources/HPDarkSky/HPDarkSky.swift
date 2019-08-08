@@ -16,13 +16,7 @@ public final class HPDarkSky {
     }
     
     public func performRequest(_ request: DarkSkyRequest, completion: @escaping (Forecast?, Error?) -> Void) {
-        guard let secret = secret else {
-            completion(nil, NSError.missingSecret as Error)
-            return
-        }
-        
-        let url = buildURL(for: secret, location: request.location)
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             guard let json = data, error == nil else {
                 completion(nil, error)
                 return
@@ -32,9 +26,10 @@ public final class HPDarkSky {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .secondsSince1970
 
-                #if DEBUG
-                print(json.json())
-                #endif
+                if let apiError = try? decoder.decode(APIError.self, from: json) {
+                    print("We hit an API Error")
+                    completion(nil, apiError.makeNSError())
+                }
                 
                 let forecast = try decoder.decode(Forecast.self, from: json)
 
@@ -43,14 +38,6 @@ public final class HPDarkSky {
                 completion(nil, parsingError)
             }
         }.resume()
-    }
-    
-    internal func buildURL(for secret: String, location: CLLocationCoordinate2D, excludedFields: [ExcludableFields]? = nil) -> URL {
-        var baseURL = DarkSkyRequest.baseURL
-        baseURL.appendPathComponent(secret)
-        baseURL.appendPathComponent("\(location.latitude),\(location.longitude)")
-
-        return baseURL
     }
     
     /**
@@ -104,11 +91,11 @@ extension Data {
     }
 }
 
-private extension NSError {
-    convenience init(description: String) {
+internal extension NSError {
+    convenience init(description: String, code: Int = 1) {
         self.init(
             domain: "com.henrikpanhans.HPDarkSky",
-            code: 1,
+            code: code,
             userInfo: [NSLocalizedDescriptionKey: description])
     }
     
