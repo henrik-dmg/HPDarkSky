@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CurrentWeather: Codable {
+public struct WeatherDatapoint: Codable {
     let timeStamp: Date
     let summary: String
     let iconName: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MinutelyWeather: Codable {
+public struct MinutelyForecast: Codable {
     let summary: String
     let icon: String
     let dataPoints: [MinutelyDatapoint]

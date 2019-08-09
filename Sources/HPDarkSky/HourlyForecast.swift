@@ -9,17 +9,12 @@ import Foundation
 
 public struct HourlyForecast: Codable {
     public let summary: String
-    public let dataPoints: [HourlyDataPoint]
-}
-
-public struct HourlyDataPoint: Codable {
-    let timeStamp: Date
-    let summary: String
-    // Icon
-    let precipitation: Precipitation
-    let temperature: Double
-    let apparentTemperature: Double
-    let dewPoint: Double
-    let humidity: Double
-
+    public let icon: String
+    public let dataPoints: [WeatherDatapoint]
+    
+    enum CodingKeys: String, CodingKey {
+        case summary
+        case icon
+        case dataPoints = "data"
+    }
 }
