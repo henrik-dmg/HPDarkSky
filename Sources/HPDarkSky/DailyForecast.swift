@@ -9,7 +9,7 @@ import Foundation
 
 public struct DailyForecast: Codable {
     let summary: String
-    let icon: String
+    let icon: WeatherIcon
     let dataPoints: [DailyDatapoint]
 
     enum CodingKeys: String, CodingKey {
@@ -22,7 +22,7 @@ public struct DailyForecast: Codable {
 public struct DailyDatapoint: Codable {
     let timeStamp: Date
     let summary: String
-    let icon: String
+    let icon: WeatherIcon
     let sunrise: Date
     let sunset: Date
     let moonPhase: Double
@@ -77,7 +77,7 @@ public struct DailyDatapoint: Codable {
 
         self.timeStamp = try container.decode(Date.self, forKey: .timeStamp)
         self.summary = try container.decode(String.self, forKey: .summary)
-        self.icon = try container.decode(String.self, forKey: .icon)
+        self.icon = try container.decode(WeatherIcon.self, forKey: .icon)
         self.sunrise = try container.decode(Date.self, forKey: .sunrise)
         self.sunset = try container.decode(Date.self, forKey: .sunset)
         self.moonPhase = try container.decode(Double.self, forKey: .moonPhase)

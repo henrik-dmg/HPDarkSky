@@ -46,6 +46,7 @@ public final class HPDarkSky {
 
                 if let apiError = try? decoder.decode(APIError.self, from: json) {
                     completion(nil, apiError.makeNSError())
+                    return
                 }
 
                 let forecast = try decoder.decode(Forecast.self, from: json)

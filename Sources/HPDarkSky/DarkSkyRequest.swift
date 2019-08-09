@@ -62,7 +62,6 @@ public enum ExcludableFields: String, RawRepresentable, CaseIterable {
     case hourly
     case daily
     case alerts
-    case flags
 }
 
 // TODO:

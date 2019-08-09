@@ -9,7 +9,7 @@ import Foundation
 
 public struct HourlyForecast: Codable {
     public let summary: String
-    public let icon: String
+    public let icon: WeatherIcon
     public let dataPoints: [WeatherDatapoint]
 
     enum CodingKeys: String, CodingKey {
