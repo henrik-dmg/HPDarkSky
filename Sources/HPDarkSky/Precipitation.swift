@@ -8,13 +8,12 @@
 import Foundation
 
 public struct Precipitation: Codable {
-
-    let intensity: Double
-    let error: Double?
-    let probability: Double
-    let type: String?
-    let maxIntensity: Double?
-    let maxIntensityTime: Date?
+    public let intensity: Double
+    public let error: Double?
+    public let probability: Double
+    public let type: String?
+    public let maxIntensity: Double?
+    public let maxIntensityTime: Date?
 
     enum CodingKeys: String, CodingKey {
         case intensity = "precipIntensity"

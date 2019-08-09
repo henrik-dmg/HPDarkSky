@@ -8,21 +8,21 @@
 import Foundation
 
 public struct WeatherDatapoint: Codable {
-    let timeStamp: Date
-    let summary: String
-    let iconName: String
-    let nearestStormDistance: Double?
-    let precipitation: Precipitation
-    let temperature: Double
-    let apparentTemperature: Double
-    let dewPoint: Double
-    let humidity: Double
-    let pressure: Double
-    let wind: Wind
-    let cloudCover: Double
-    let uvIndex: Int
-    let visibility: Double
-    let ozone: Double
+    public let timeStamp: Date
+    public let summary: String
+    public let iconName: String
+    public let nearestStormDistance: Double?
+    public let precipitation: Precipitation
+    public let temperature: Double
+    public let apparentTemperature: Double
+    public let dewPoint: Double
+    public let humidity: Double
+    public let pressure: Double
+    public let wind: Wind
+    public let cloudCover: Double
+    public let uvIndex: Int
+    public let visibility: Double
+    public let ozone: Double
 
     enum CodingKeys: String, CodingKey {
         case timeStamp = "time"

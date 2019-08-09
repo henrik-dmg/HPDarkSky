@@ -60,5 +60,5 @@ public enum Language: String {
     case simplifiedChinese = "zh"
     case traditionalChinese = "zh-tw"
 
-    static let `default`: Language = Language.english
+    public static let `default`: Language = Language.english
 }

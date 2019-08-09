@@ -24,7 +24,7 @@ public enum WeatherIcon: String, Codable {
 import UIKit
 
 @available(iOS 13, *)
-extension WeatherIcon {
+public extension WeatherIcon {
     func filledIcon(compatibleWith traitCollection: UITraitCollection?) -> UIImage {
         return makeIcon(filled: true, compatibleWith: traitCollection)
     }

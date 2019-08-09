@@ -8,9 +8,9 @@
 import Foundation
 
 public struct MinutelyForecast: Codable {
-    let summary: String
-    let icon: WeatherIcon
-    let dataPoints: [MinutelyDatapoint]
+    public let summary: String
+    public let icon: WeatherIcon
+    public let dataPoints: [MinutelyDatapoint]
 
     enum CodingKeys: String, CodingKey {
         case summary
@@ -20,8 +20,8 @@ public struct MinutelyForecast: Codable {
 }
 
 public struct MinutelyDatapoint: Codable {
-    let timeStamp: Date
-    let precipitation: Precipitation
+    public let timeStamp: Date
+    public let precipitation: Precipitation
 
     enum CodingKeys: String, CodingKey {
         case timeStamp = "time"

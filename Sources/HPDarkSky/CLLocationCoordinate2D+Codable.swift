@@ -44,12 +44,12 @@ extension CLLocationCoordinate2D: Codable {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 
-    var isValidLocation: Bool {
+    public var isValidLocation: Bool {
         return latitude.isValidLatitude && longitude.isValidLongitude
     }
 }
 
-extension Double {
+public extension Double {
     var isValidLatitude: Bool {
         return (-90.00...90.000).contains(self)
     }

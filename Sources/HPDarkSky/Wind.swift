@@ -8,13 +8,10 @@
 import Foundation
 
 public struct Wind: Codable {
-
-    static let none = Wind(speed: 0, gust: 0, bearing: 0, gustTime: nil)
-
-    let speed: Double
-    let gust: Double
-    let bearing: Int
-    let gustTime: Date?
+    public let speed: Double
+    public let gust: Double
+    public let bearing: Int
+    public let gustTime: Date?
 
     enum CodingKeys: String, CodingKey {
         case speed = "windSpeed"

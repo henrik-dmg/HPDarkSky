@@ -8,11 +8,11 @@
 import Foundation
 
 public struct Alert: Codable {
-    let title: String
-    let timeStamp: Date
-    let expires: Date
-    let description: String
-    let url: String
+    public let title: String
+    public let timeStamp: Date
+    public let expires: Date
+    public let description: String
+    public let url: String
 
     enum CodingKeys: String, CodingKey {
         case title

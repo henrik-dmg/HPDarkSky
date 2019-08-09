@@ -8,9 +8,9 @@
 import Foundation
 
 public struct DailyForecast: Codable {
-    let summary: String
-    let icon: WeatherIcon
-    let dataPoints: [DailyDatapoint]
+    public let summary: String
+    public let icon: WeatherIcon
+    public let dataPoints: [DailyDatapoint]
 
     enum CodingKeys: String, CodingKey {
         case summary
@@ -20,30 +20,30 @@ public struct DailyForecast: Codable {
 }
 
 public struct DailyDatapoint: Codable {
-    let timeStamp: Date
-    let summary: String
-    let icon: WeatherIcon
-    let sunrise: Date
-    let sunset: Date
-    let moonPhase: Double
-    let precipitation: Precipitation
-    let maxTemperature: Double
-    let maxTemperatureTime: Date
-    let minTemperature: Double
-    let minTemperatureTime: Date
-    let apparentMaxTemperature: Double
-    let apparentMaxTemperatureTime: Date
-    let apparentMinTemperature: Double
-    let apparentMinTemperatureTime: Date
-    let dewPoint: Double
-    let humidity: Double
-    let pressure: Double
-    let wind: Wind
-    let cloudCover: Double
-    let uvIndex: Double
-    let uvIndexTime: Date
-    let visibility: Double
-    let ozone: Double
+    public let timeStamp: Date
+    public let summary: String
+    public let icon: WeatherIcon
+    public let sunrise: Date
+    public let sunset: Date
+    public let moonPhase: Double
+    public let precipitation: Precipitation
+    public let maxTemperature: Double
+    public let maxTemperatureTime: Date
+    public let minTemperature: Double
+    public let minTemperatureTime: Date
+    public let apparentMaxTemperature: Double
+    public let apparentMaxTemperatureTime: Date
+    public let apparentMinTemperature: Double
+    public let apparentMinTemperatureTime: Date
+    public let dewPoint: Double
+    public let humidity: Double
+    public let pressure: Double
+    public let wind: Wind
+    public let cloudCover: Double
+    public let uvIndex: Double
+    public let uvIndexTime: Date
+    public let visibility: Double
+    public let ozone: Double
 
     enum CodingKeys: String, CodingKey {
         case timeStamp = "time"

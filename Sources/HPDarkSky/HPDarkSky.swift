@@ -19,9 +19,16 @@ public final class HPDarkSky {
         hitEndpoint(with: request, completion: completion)
     }
 
-    public func requestWeather(forLocation location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = [], completion: @escaping (Forecast?, Error?) -> Void) {
+    public func requestWeather(forLocation location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = [], pastDate: Date? = nil, completion: @escaping (Forecast?, Error?) -> Void) {
         guard let secret = self.secret else {
             completion(nil, NSError.missingSecret)
+            return
+        }
+        
+        if let pastDate = pastDate {
+            if pastDate.timeIntervalSinceNow > 0.00 {
+                completion(nil, NSError.invalidRequestDate)
+            }
             return
         }
         let request = DarkSkyRequest(secret: secret, location: location, excludedFields: excludedFields)
@@ -83,4 +90,5 @@ internal extension NSError {
 
     static let missingSecret = NSError(description: "No API secret was found")
     static let invalidLocation = NSError(description: "The specified location was invalid", code: 69)
+    static let invalidRequestDate = NSError(description: "The specified time machine request was in the future", code: 420)
 }

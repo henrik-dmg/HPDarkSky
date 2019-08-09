@@ -9,15 +9,16 @@ import Foundation
 import CoreLocation
 
 public struct Forecast: Codable, CustomStringConvertible {
-    let location: CLLocationCoordinate2D
-    let timezone: TimeZone
-    let currently: WeatherDatapoint?
-    let minutely: MinutelyForecast?
-    let hourly: HourlyForecast?
-    let daily: DailyForecast?
-    let alerts: [Alert]?
+
     private let flags: Flags
-    var units: Units {
+    public let location: CLLocationCoordinate2D
+    public let timezone: TimeZone
+    public let currently: WeatherDatapoint?
+    public let minutely: MinutelyForecast?
+    public let hourly: HourlyForecast?
+    public let daily: DailyForecast?
+    public let alerts: [Alert]?
+    public var units: Units {
         return flags.units
     }
 

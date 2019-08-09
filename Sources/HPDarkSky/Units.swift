@@ -11,5 +11,5 @@ public enum Units: String {
     case imperial = "us"
     case metric = "si"
 
-    static let `default`: Units = .metric
+    public static let `default`: Units = .metric
 }
