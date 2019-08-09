@@ -14,21 +14,31 @@ public struct DarkSkyRequest {
     public var location: CLLocationCoordinate2D!
     public var language: Language = .english
     public var units: Units = .metric
-    private let secret: String
+    public var date: Date?
+    public private(set) let secret: String
 
     public init(secret: String, location: CLLocationCoordinate2D, date: Date? = nil, excludedFields: [ExcludableFields] = []) {
         self.secret = secret
+        self.date = date
         self.excludedFields = excludedFields
         self.location = location
     }
 
-    public func constructURL() -> URL? {
+    internal func makeURL() -> URL? {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.darksky.net"
-        components.path = "/forecast/\(secret)/\(location.latitude),\(location.longitude)"
+        components.path = makeURLPath()
         components.queryItems = makeQueryItems()
         return components.url
+    }
+
+    private func makeURLPath() -> String {
+        var basePath = "/forecast/\(secret)/\(location.latitude),\(location.longitude)"
+        if let date = date {
+            basePath.append("\(date.timeIntervalSince1970)")
+        }
+        return basePath
     }
 
     private func makeQueryItems() -> [URLQueryItem] {
@@ -57,6 +67,6 @@ public enum ExcludableFields: String, RawRepresentable, CaseIterable {
 // TODO:
 public extension URLSession {
     func dataTask(with request: DarkSkyRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        return self.dataTask(with: request.constructURL()!, completionHandler: completionHandler)
+        return self.dataTask(with: request.makeURL()!, completionHandler: completionHandler)
     }
 }

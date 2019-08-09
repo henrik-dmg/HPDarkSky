@@ -11,7 +11,7 @@ public struct WeatherDatapoint: Codable {
     let timeStamp: Date
     let summary: String
     let iconName: String
-    let nearestStormDistance: Double
+    let nearestStormDistance: Double?
     let precipitation: Precipitation
     let temperature: Double
     let apparentTemperature: Double
@@ -48,7 +48,7 @@ public struct WeatherDatapoint: Codable {
         self.timeStamp = try container.decode(Date.self, forKey: .timeStamp)
         self.summary = try container.decode(String.self, forKey: .summary)
         self.iconName = try container.decode(String.self, forKey: .iconName)
-        self.nearestStormDistance = try container.decode(Double.self, forKey: .nearestStormDistance)
+        self.nearestStormDistance = try container.decodeIfPresent(Double.self, forKey: .nearestStormDistance)
         self.temperature = try container.decode(Double.self, forKey: .temperature)
         self.apparentTemperature = try container.decode(Double.self, forKey: .apparentTemperature)
         self.dewPoint = try container.decode(Double.self, forKey: .dewPoint)

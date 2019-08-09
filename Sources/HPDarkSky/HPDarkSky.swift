@@ -4,7 +4,7 @@ import CoreLocation
 public final class HPDarkSky {
 
     public static let shared = HPDarkSky(secret: nil)
-
+    public static let attributionURL = URL(string: "https://darksky.net/poweredby/")!
     public var language: Language = .english
     public var units: Units = .metric
     public var secret: String?
