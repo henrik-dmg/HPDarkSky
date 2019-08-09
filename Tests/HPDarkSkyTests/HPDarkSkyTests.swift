@@ -19,6 +19,13 @@ final class HPDarkSkyTests: XCTestCase {
         XCTAssertNotNil(TestSecret.secret, "Secret was apparently not set as env variable")
     }
 
+    func testCrazyLocation() {
+        let crazyLocation = CLLocationCoordinate2D(latitude: 200, longitude: 300)
+        let goodLocation = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+        XCTAssertFalse(crazyLocation.isValidLocation)
+        XCTAssertTrue(goodLocation.isValidLocation)
+    }
+
     func testExcludingAll() {
         var request = makeRequestObject()
         request.excludedFields = ExcludableFields.allCases
@@ -63,6 +70,7 @@ final class HPDarkSkyTests: XCTestCase {
     static var allTests = [
         "testSecretExistsInEnvironment": testSecretExistsInEnvironment,
         "testBasicRequest": testBasicRequest,
-        "testExcludingCurrently": testExcludingAll
+        "testExcludingCurrently": testExcludingAll,
+        "testCrazyLocation": testCrazyLocation
     ]
 }

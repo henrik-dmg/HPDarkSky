@@ -13,7 +13,7 @@ public struct Alert: Codable {
     let expires: Date
     let description: String
     let url: String
-    
+
     enum CodingKeys: String, CodingKey {
         case title
         case timeStamp = "time"

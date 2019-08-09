@@ -11,7 +11,7 @@ public struct DailyForecast: Codable {
     let summary: String
     let icon: String
     let dataPoints: [DailyDatapoint]
-    
+
     enum CodingKeys: String, CodingKey {
         case summary
         case icon
@@ -44,7 +44,7 @@ public struct DailyDatapoint: Codable {
     let uvIndexTime: Date
     let visibility: Double
     let ozone: Double
-    
+
     enum CodingKeys: String, CodingKey {
         case timeStamp = "time"
         case summary
@@ -71,10 +71,10 @@ public struct DailyDatapoint: Codable {
         case visibility
         case ozone
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         self.timeStamp = try container.decode(Date.self, forKey: .timeStamp)
         self.summary = try container.decode(String.self, forKey: .summary)
         self.icon = try container.decode(String.self, forKey: .icon)

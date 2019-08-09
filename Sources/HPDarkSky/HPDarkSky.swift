@@ -29,6 +29,11 @@ public final class HPDarkSky {
     }
 
     private func hitEndpoint(with request: DarkSkyRequest, completion: @escaping (Forecast?, Error?) -> Void) {
+        guard request.location.isValidLocation else {
+            completion(nil, NSError.invalidLocation)
+            return
+        }
+
         URLSession.shared.dataTask(with: request) { data, _, error in
             guard let json = data, error == nil else {
                 completion(nil, error)
@@ -52,43 +57,6 @@ public final class HPDarkSky {
         }.resume()
     }
 
-    /**
-     Private function to actually make the API calls
-     
-     - Parameters:
-        - url: The completete the GET request is sent to
-        - completion: Completion block that is called when the network call is completed
-        - json: Dictionary containing the response in JSON format
-        - error: An error object that indicates why the request failed, or nil if the request was successful.
-    */
-//    private func request<T: Codable>(url: inout URL, for type: T.Type, completion: @escaping (_ data: T?, _ error: Error?) -> ()) {
-//        let values = Array(self.params.values)
-//        url.add(values)
-//        let urlRequest = URLRequest(url: url)
-//
-//        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-//            guard let json = data, error == nil else {
-//                completion(nil, error)
-//                return
-//            }
-//
-//            do {
-//                let decoder = JSONDecoder()
-//                decoder.dateDecodingStrategy = .secondsSince1970
-//
-//                if let apiError = try? decoder.decode(APIError.self, from: json) {
-//                    completion(nil, apiError.nserror)
-//                    return
-//                }
-//
-//                let model = try decoder.decode(type, from: json)
-//
-//                completion(model, error)
-//            } catch let parsingError {
-//                completion(nil, parsingError)
-//            }
-//        }.resume()
-//    }
 }
 
 // Felt cute, will delete later
@@ -113,4 +81,5 @@ internal extension NSError {
     }
 
     static let missingSecret = NSError(description: "No API secret was found")
+    static let invalidLocation = NSError(description: "The specified location was invalid", code: 69)
 }

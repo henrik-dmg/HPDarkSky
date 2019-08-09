@@ -36,4 +36,25 @@ extension CLLocationCoordinate2D: Codable {
             longitude: try locationContainer.decode(Double.self, forKey: .longitude))
 
     }
+
+    public static func validated(latitude: Double, longitude: Double) -> CLLocationCoordinate2D? {
+        guard latitude.isValidLatitude && longitude.isValidLongitude else {
+            return nil
+        }
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+
+    var isValidLocation: Bool {
+        return latitude.isValidLatitude && longitude.isValidLongitude
+    }
+}
+
+extension Double {
+    var isValidLatitude: Bool {
+        return (-90.00...90.000).contains(self)
+    }
+
+    var isValidLongitude: Bool {
+        return (-180.00...180.00).contains(self)
+    }
 }

@@ -9,13 +9,14 @@ import Foundation
 import CoreLocation
 
 public struct DarkSkyRequest {
-    internal static let baseURL = URL(string: "https://api.darksky.net/forecast")!
+    private static let baseURL = URL(string: "https://api.darksky.net/forecast")!
+
     public var excludedFields = [ExcludableFields]()
     public var location: CLLocationCoordinate2D!
     public var language: Language = .english
     public var units: Units = .metric
     public var date: Date?
-    public private(set) let secret: String
+    private let secret: String
 
     public init(secret: String, location: CLLocationCoordinate2D, date: Date? = nil, excludedFields: [ExcludableFields] = []) {
         self.secret = secret
