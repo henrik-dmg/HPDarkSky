@@ -21,8 +21,10 @@ final class HPDarkSkyTests: XCTestCase {
 
     func testCrazyLocation() {
         let crazyLocation = CLLocationCoordinate2D(latitude: 200, longitude: 300)
+        let anotherCrazyLocaiton = CLLocationCoordinate2D.validated(latitude: 200, longitude: 300)
         let goodLocation = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
         XCTAssertFalse(crazyLocation.isValidLocation)
+        XCTAssertNil(anotherCrazyLocaiton, "Should not init with invalid coordinates")
         XCTAssertTrue(goodLocation.isValidLocation)
     }
 
