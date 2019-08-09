@@ -10,7 +10,7 @@ import Foundation
 public struct WeatherDatapoint: Codable {
     public let timeStamp: Date
     public let summary: String
-    public let iconName: String
+    public let icon: WeatherIcon
     public let nearestStormDistance: Double?
     public let precipitation: Precipitation
     public let temperature: Double
@@ -27,7 +27,7 @@ public struct WeatherDatapoint: Codable {
     enum CodingKeys: String, CodingKey {
         case timeStamp = "time"
         case summary
-        case iconName = "icon"
+        case icon
         case nearestStormDistance
         case precipitation
         case temperature
@@ -47,7 +47,7 @@ public struct WeatherDatapoint: Codable {
 
         self.timeStamp = try container.decode(Date.self, forKey: .timeStamp)
         self.summary = try container.decode(String.self, forKey: .summary)
-        self.iconName = try container.decode(String.self, forKey: .iconName)
+        self.icon = try container.decode(WeatherIcon.self, forKey: .icon)
         self.nearestStormDistance = try container.decodeIfPresent(Double.self, forKey: .nearestStormDistance)
         self.temperature = try container.decode(Double.self, forKey: .temperature)
         self.apparentTemperature = try container.decode(Double.self, forKey: .apparentTemperature)
