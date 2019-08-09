@@ -14,6 +14,8 @@ public struct Forecast: Codable {
     let currently: WeatherDatapoint?
     let minutely: MinutelyForecast?
     let hourly: HourlyForecast?
+    let daily: DailyForecast?
+    let alerts: [Alert]?
 
     enum CodingKeys: String, CodingKey {
         case location
@@ -21,6 +23,8 @@ public struct Forecast: Codable {
         case currently
         case minutely
         case hourly
+        case daily
+        case alerts
     }
 
     public init(from decoder: Decoder) throws {
@@ -31,5 +35,7 @@ public struct Forecast: Codable {
         self.currently = try container.decodeIfPresent(WeatherDatapoint.self, forKey: .currently)
         self.minutely = try container.decodeIfPresent(MinutelyForecast.self, forKey: .minutely)
         self.hourly = try container.decodeIfPresent(HourlyForecast.self, forKey: .hourly)
+        self.daily = try container.decodeIfPresent(DailyForecast.self, forKey: .daily)
+        self.alerts = try container.decodeIfPresent([Alert].self, forKey: .alerts)
     }
 }
