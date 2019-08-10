@@ -15,11 +15,11 @@ public final class HPDarkSky {
         self.units = units
     }
 
-    public func performRequest(_ request: DarkSkyRequest, completion: @escaping (Forecast?, Error?) -> Void) {
+    public func performRequest(_ request: DarkSkyRequest, completion: @escaping (DarkSkyResponse?, Error?) -> Void) {
         hitEndpoint(with: request, completion: completion)
     }
 
-    public func requestWeather(forLocation location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = [], pastDate: Date? = nil, completion: @escaping (Forecast?, Error?) -> Void) {
+    public func requestWeather(forLocation location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = [], pastDate: Date? = nil, completion: @escaping (DarkSkyResponse?, Error?) -> Void) {
         guard let secret = self.secret else {
             completion(nil, NSError.missingSecret)
             return
@@ -35,7 +35,7 @@ public final class HPDarkSky {
         hitEndpoint(with: request, completion: completion)
     }
 
-    private func hitEndpoint(with request: DarkSkyRequest, completion: @escaping (Forecast?, Error?) -> Void) {
+    private func hitEndpoint(with request: DarkSkyRequest, completion: @escaping (DarkSkyResponse?, Error?) -> Void) {
         guard request.location.isValidLocation else {
             completion(nil, NSError.invalidLocation)
             return
@@ -56,7 +56,7 @@ public final class HPDarkSky {
                     return
                 }
 
-                let forecast = try decoder.decode(Forecast.self, from: json)
+                let forecast = try decoder.decode(DarkSkyResponse.self, from: json)
 
                 completion(forecast, error)
             } catch let parsingError {

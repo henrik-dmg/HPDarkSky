@@ -7,97 +7,112 @@
 
 import Foundation
 
-public struct DailyForecast: Codable {
-    public let summary: String
-    public let icon: WeatherIcon
-    public let dataPoints: [DailyDatapoint]
-
-    enum CodingKeys: String, CodingKey {
-        case summary
-        case icon
-        case dataPoints = "data"
+public class DailyForecast: Forecast {
+    let datapoints: [DailyDatapoint]
+    
+    enum DailyCodingKeys: String, CodingKey {
+        case datapoints = "data"
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DailyCodingKeys.self)
+        self.datapoints = try container.decode([DailyDatapoint].self, forKey: .datapoints)
+        
+        try super.init(from: decoder)
     }
 }
 
-public struct DailyDatapoint: Codable {
-    public let timeStamp: Date
-    public let summary: String
-    public let icon: WeatherIcon
-    public let sunrise: Date
-    public let sunset: Date
+public class DailyDatapoint: BasicDatapoint {
+    /// The daytime high apparent temperature.
+    public let apparentTemperatureHigh: Double
+    /// The UNIX time representing when the daytime high apparent temperature occurs.
+    public let apparentTemperatureHighTime: Date
+    /// The overnight low apparent temperature.
+    public let apparentTemperatureLow: Double
+    /// The UNIX time representing when the overnight low apparent temperature occurs.
+    public let apparentTemperatureLowTime: Date
+    /// The maximum apparent temperature during a given date.
+    public let apparentTemperatureMax: Double
+    /// The UNIX time representing when the maximum apparent temperature during a given date occurs.
+    public let apparentTemperatureMaxTime: Date
+    /// The minimum apparent temperature during a given date.
+    public let apparentTemperatureMin: Double
+    /// The UNIX time representing when the minimum apparent temperature during a given date occurs.
+    public let apparentTemperatureMinTime: Date
+    /// The fractional part of the lunation number during the given day: a value of 0 corresponds to a new moon,
+    /// 0.25 to a first quarter moon, 0.5 to a full moon, and 0.75 to a last quarter moon.
+    /// (The ranges in between these represent waxing crescent, waxing gibbous, waning gibbous, and waning crescent moons, respectively.)
     public let moonPhase: Double
-    public let precipitation: Precipitation
-    public let maxTemperature: Double
-    public let maxTemperatureTime: Date
-    public let minTemperature: Double
-    public let minTemperatureTime: Date
-    public let apparentMaxTemperature: Double
-    public let apparentMaxTemperatureTime: Date
-    public let apparentMinTemperature: Double
-    public let apparentMinTemperatureTime: Date
-    public let dewPoint: Double
-    public let humidity: Double
-    public let pressure: Double
-    public let wind: Wind
-    public let cloudCover: Double
-    public let uvIndex: Double
-    public let uvIndexTime: Date
-    public let visibility: Double
-    public let ozone: Double
-
-    enum CodingKeys: String, CodingKey {
-        case timeStamp = "time"
-        case summary
-        case icon
-        case sunrise = "sunriseTime"
-        case sunset = "sunsetTime"
+    /// The UNIX time of when the sun will rise during a given day.
+    public let sunriseTime: Date
+    /// The UNIX time of when the sun will set during a given day.
+    public let sunsetTime: Date
+    /// The daytime high temperature.
+    public let temperatureHigh: Double
+    /// The UNIX time representing when the daytime high temperature occurs.
+    public let temperatureHighTime: Date
+    /// The overnight low temperature.
+    public let temperatureLow: Double
+    /// The UNIX time representing when the overnight low temperature occurs.
+    public let temperatureLowTime: Date
+    /// The maximum temperature during a given date.
+    public let temperatureMax: Double
+    /// The UNIX time representing when the maximum temperature during a given date occurs.
+    public let temperatureMaxTime: Date
+    /// The minimum temperature during a given date.
+    public let temperatureMin: Double
+    /// The UNIX time representing when the minimum temperature during a given date occurs.
+    public let temperatureMinTime: Date
+    /// The UNIX time of when the maximum uvIndex occurs during a given day.
+    public let uvIndexTime: Double
+    
+    enum DailyDataPointKeys: String, CodingKey {
+        case apparentTemperatureHigh
+        case apparentTemperatureHighTime
+        case apparentTemperatureLow
+        case apparentTemperatureLowTime
+        case apparentTemperatureMax
+        case apparentTemperatureMaxTime
+        case apparentTemperatureMin
+        case apparentTemperatureMinTime
         case moonPhase
-        case precipitation
-        case maxTemperature = "temperatureHigh"
-        case maxTemperatureTime = "temperatureHighTime"
-        case minTemperature = "temperatureLow"
-        case minTemperatureTime = "temperatureLowTime"
-        case apparentMaxTemperature = "apparentTemperatureHigh"
-        case apparentMaxTemperatureTime = "apparentTemperatureHighTime"
-        case apparentMinTemperature = "apparentTemperatureLow"
-        case apparentMinTemperatureTime = "apparentTemperatureLowTime"
-        case dewPoint
-        case humidity
-        case pressure
-        case wind
-        case cloudCover
-        case uvIndex
+        case sunriseTime
+        case sunsetTime
+        case temperatureHigh
+        case temperatureHighTime
+        case temperatureLow
+        case temperatureLowTime
+        case temperatureMax
+        case temperatureMaxTime
+        case temperatureMin
+        case temperatureMinTime
         case uvIndexTime
-        case visibility
-        case ozone
     }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        self.timeStamp = try container.decode(Date.self, forKey: .timeStamp)
-        self.summary = try container.decode(String.self, forKey: .summary)
-        self.icon = try container.decode(WeatherIcon.self, forKey: .icon)
-        self.sunrise = try container.decode(Date.self, forKey: .sunrise)
-        self.sunset = try container.decode(Date.self, forKey: .sunset)
+    
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DailyDataPointKeys.self)
+        
+        self.apparentTemperatureHigh = try container.decode(Double.self, forKey: .apparentTemperatureHigh)
+        self.apparentTemperatureHighTime = try container.decode(Date.self, forKey: .apparentTemperatureHighTime)
+        self.apparentTemperatureLow = try container.decode(Double.self, forKey: .apparentTemperatureLow)
+        self.apparentTemperatureLowTime = try container.decode(Date.self, forKey: .apparentTemperatureLowTime)
+        self.apparentTemperatureMax = try container.decode(Double.self, forKey: .apparentTemperatureMax)
+        self.apparentTemperatureMaxTime = try container.decode(Date.self, forKey: .apparentTemperatureMaxTime)
+        self.apparentTemperatureMin = try container.decode(Double.self, forKey: .apparentTemperatureMin)
+        self.apparentTemperatureMinTime = try container.decode(Date.self, forKey: .apparentTemperatureMinTime)
         self.moonPhase = try container.decode(Double.self, forKey: .moonPhase)
-        self.maxTemperature = try container.decode(Double.self, forKey: .maxTemperature)
-        self.maxTemperatureTime = try container.decode(Date.self, forKey: .maxTemperatureTime)
-        self.minTemperature = try container.decode(Double.self, forKey: .minTemperature)
-        self.minTemperatureTime = try container.decode(Date.self, forKey: .minTemperatureTime)
-        self.apparentMaxTemperature = try container.decode(Double.self, forKey: .apparentMaxTemperature)
-        self.apparentMaxTemperatureTime = try container.decode(Date.self, forKey: .apparentMaxTemperatureTime)
-        self.apparentMinTemperature = try container.decode(Double.self, forKey: .apparentMinTemperature)
-        self.apparentMinTemperatureTime = try container.decode(Date.self, forKey: .apparentMinTemperatureTime)
-        self.dewPoint = try container.decode(Double.self, forKey: .dewPoint)
-        self.humidity = try container.decode(Double.self, forKey: .humidity)
-        self.pressure = try container.decode(Double.self, forKey: .pressure)
-        self.cloudCover = try container.decode(Double.self, forKey: .cloudCover)
-        self.uvIndex = try container.decode(Double.self, forKey: .uvIndex)
-        self.uvIndexTime = try container.decode(Date.self, forKey: .uvIndexTime)
-        self.visibility = try container.decode(Double.self, forKey: .visibility)
-        self.ozone = try container.decode(Double.self, forKey: .ozone)
-        self.wind = try Wind.decode(from: decoder)
-        self.precipitation = try Precipitation.decode(from: decoder)
+        self.sunriseTime = try container.decode(Date.self, forKey: .sunriseTime)
+        self.sunsetTime = try container.decode(Date.self, forKey: .sunsetTime)
+        self.temperatureHigh = try container.decode(Double.self, forKey: .temperatureHigh)
+        self.temperatureHighTime = try container.decode(Date.self, forKey: .temperatureHighTime)
+        self.temperatureLow = try container.decode(Double.self, forKey: .temperatureLow)
+        self.temperatureLowTime = try container.decode(Date.self, forKey: .temperatureLowTime)
+        self.temperatureMax = try container.decode(Double.self, forKey: .temperatureMax)
+        self.temperatureMaxTime = try container.decode(Date.self, forKey: .temperatureMaxTime)
+        self.temperatureMin = try container.decode(Double.self, forKey: .temperatureMin)
+        self.temperatureMinTime = try container.decode(Date.self, forKey: .temperatureMinTime)
+        self.uvIndexTime = try container.decode(Double.self, forKey: .uvIndexTime)
+
+        try super.init(from: decoder)
     }
 }

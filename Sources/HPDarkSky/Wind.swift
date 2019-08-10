@@ -10,7 +10,7 @@ import Foundation
 public struct Wind: Codable {
     public let speed: Double
     public let gust: Double
-    public let bearing: Int
+    public let bearing: Int?
     public let gustTime: Date?
 
     enum CodingKeys: String, CodingKey {
@@ -25,7 +25,7 @@ public struct Wind: Codable {
         return Wind(
             speed: try windContainer.decode(Double.self, forKey: .speed),
             gust: try windContainer.decode(Double.self, forKey: .gust),
-            bearing: try windContainer.decode(Int.self, forKey: .bearing),
+            bearing: try windContainer.decodeIfPresent(Int.self, forKey: .bearing),
             gustTime: try windContainer.decodeIfPresent(Date.self, forKey: .gustTime))
     }
 }

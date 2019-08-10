@@ -1,20 +1,14 @@
 //
-//  HourlyForecast.swift
+//  File.swift
 //  
 //
-//  Created by Henrik Panhans on 08.08.19.
+//  Created by Henrik Panhans on 10.08.19.
 //
 
 import Foundation
 
-public struct HourlyForecast: Codable {
-    public let summary: String
-    public let icon: WeatherIcon
-    public let dataPoints: [WeatherDatapoint]
-
-    enum CodingKeys: String, CodingKey {
-        case summary
-        case icon
-        case dataPoints = "data"
+public class HourlyForecast: Forecast {
+    public required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
     }
 }

@@ -23,6 +23,18 @@ public struct WeatherDatapoint: Codable {
     public let uvIndex: Int
     public let visibility: Double
     public let ozone: Double
+    public let sunrise: Date?
+    public let sunset: Date?
+    public let moonPhase: Double?
+    public let maxTemperature: Double?
+    public let maxTemperatureTime: Date?
+    public let minTemperature: Double?
+    public let minTemperatureTime: Date?
+    public let apparentMaxTemperature: Double?
+    public let apparentMaxTemperatureTime: Date?
+    public let apparentMinTemperature: Double?
+    public let apparentMinTemperatureTime: Date?
+    public let uvIndexTime: Date?
 
     enum CodingKeys: String, CodingKey {
         case timeStamp = "time"
@@ -40,6 +52,18 @@ public struct WeatherDatapoint: Codable {
         case uvIndex
         case visibility
         case ozone
+        case sunrise = "sunriseTime"
+        case sunset = "sunsetTime"
+        case moonPhase
+        case maxTemperature = "temperatureHigh"
+        case maxTemperatureTime = "temperatureHighTime"
+        case minTemperature = "temperatureLow"
+        case minTemperatureTime = "temperatureLowTime"
+        case apparentMaxTemperature = "apparentTemperatureHigh"
+        case apparentMaxTemperatureTime = "apparentTemperatureHighTime"
+        case apparentMinTemperature = "apparentTemperatureLow"
+        case apparentMinTemperatureTime = "apparentTemperatureLowTime"
+        case uvIndexTime
     }
 
     public init(from decoder: Decoder) throws {
@@ -60,5 +84,17 @@ public struct WeatherDatapoint: Codable {
         self.ozone = try container.decode(Double.self, forKey: .ozone)
         self.wind = try Wind.decode(from: decoder)
         self.precipitation = try Precipitation.decode(from: decoder)
+        self.sunrise = try container.decodeIfPresent(Date.self, forKey: .sunrise)
+        self.sunset = try container.decodeIfPresent(Date.self, forKey: .sunset)
+        self.moonPhase = try container.decodeIfPresent(Double.self, forKey: .moonPhase)
+        self.maxTemperature = try container.decodeIfPresent(Double.self, forKey: .maxTemperature)
+        self.maxTemperatureTime = try container.decodeIfPresent(Date.self, forKey: .maxTemperatureTime)
+        self.minTemperature = try container.decodeIfPresent(Double.self, forKey: .minTemperature)
+        self.minTemperatureTime = try container.decodeIfPresent(Date.self, forKey: .minTemperatureTime)
+        self.apparentMaxTemperature = try container.decodeIfPresent(Double.self, forKey: .apparentMaxTemperature)
+        self.apparentMaxTemperatureTime = try container.decodeIfPresent(Date.self, forKey: .apparentMaxTemperatureTime)
+        self.apparentMinTemperature = try container.decodeIfPresent(Double.self, forKey: .apparentMinTemperature)
+        self.apparentMinTemperatureTime = try container.decodeIfPresent(Date.self, forKey: .apparentMinTemperatureTime)
+        self.uvIndexTime = try container.decodeIfPresent(Date.self, forKey: .uvIndexTime)
     }
 }

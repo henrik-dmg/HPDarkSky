@@ -14,6 +14,7 @@ public struct Precipitation: Codable {
     public let type: String?
     public let maxIntensity: Double?
     public let maxIntensityTime: Date?
+    public let accumulation: Double?
 
     enum CodingKeys: String, CodingKey {
         case intensity = "precipIntensity"
@@ -22,6 +23,7 @@ public struct Precipitation: Codable {
         case type = "precipType"
         case maxIntensity = "precipIntensityMax"
         case maxIntensityTime = "precipIntensityMaxTime"
+        case accumulation = "precipAccumulation"
     }
 
     public static func decode(from decoder: Decoder) throws -> Precipitation {
@@ -32,6 +34,7 @@ public struct Precipitation: Codable {
             probability: try precipContainer.decode(Double.self, forKey: .probability),
             type: try precipContainer.decodeIfPresent(String.self, forKey: .type),
             maxIntensity: try precipContainer.decodeIfPresent(Double.self, forKey: .maxIntensity),
-            maxIntensityTime: try precipContainer.decodeIfPresent(Date.self, forKey: .maxIntensityTime))
+            maxIntensityTime: try precipContainer.decodeIfPresent(Date.self, forKey: .maxIntensityTime),
+            accumulation: try precipContainer.decodeIfPresent(Double.self, forKey: .accumulation))
     }
 }
