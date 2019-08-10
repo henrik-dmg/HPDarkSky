@@ -20,10 +20,10 @@ public enum WeatherIcon: String, Codable {
     case fog
 }
 
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 
-@available(iOS 13, *)
+@available(iOS 13, tvOS 13, *)
 public extension WeatherIcon {
     func filledIcon(compatibleWith traitCollection: UITraitCollection?) -> UIImage {
         return makeIcon(filled: true, compatibleWith: traitCollection)
@@ -63,5 +63,4 @@ public extension WeatherIcon {
         return UIImage(systemName: iconName, compatibleWith: traitCollection)!
     }
 }
-
 #endif
