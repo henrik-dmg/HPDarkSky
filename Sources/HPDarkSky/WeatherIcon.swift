@@ -25,14 +25,17 @@ import UIKit
 
 @available(iOS 13, tvOS 13, *)
 public extension WeatherIcon {
+    @available(iOS 13, tvOS 13, *)
     func filledIcon(compatibleWith traitCollection: UITraitCollection?) -> UIImage {
         return makeIcon(filled: true, compatibleWith: traitCollection)
     }
-    
+
+    @available(iOS 13, tvOS 13, *)
     func hollowIcon(compatibleWith traitCollection: UITraitCollection?) -> UIImage {
         return makeIcon(filled: false, compatibleWith: traitCollection)
     }
-    
+
+    @available(iOS 13, tvOS 13, *)
     private func makeIcon(filled: Bool, compatibleWith traitCollection: UITraitCollection?) -> UIImage {
         var iconName = ""
         switch self {
@@ -57,9 +60,9 @@ public extension WeatherIcon {
         case .fog:
             iconName = "cloud.fog"
         }
-        
+
         if filled { iconName.append(".fill") }
-        
+
         return UIImage(systemName: iconName, compatibleWith: traitCollection)!
     }
 }

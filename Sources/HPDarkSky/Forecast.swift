@@ -9,7 +9,6 @@ import Foundation
 import CoreLocation
 
 public struct Forecast: Codable, CustomStringConvertible {
-
     private let flags: Flags
     public let location: CLLocationCoordinate2D
     public let timezone: TimeZone
@@ -45,7 +44,7 @@ public struct Forecast: Codable, CustomStringConvertible {
         self.alerts = try container.decodeIfPresent([Alert].self, forKey: .alerts)
         self.flags = try container.decode(Flags.self, forKey: .flags)
     }
-    
+
     public var description: String {
         let className = type(of: self)
         return "\(className)(location: \(location), timeZone: \(timezone.identifier))"

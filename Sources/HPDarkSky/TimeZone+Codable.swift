@@ -16,8 +16,7 @@ extension TimeZone {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         guard let timeZone = TimeZone(identifier: try container.decode(String.self, forKey: .identifier)) else {
-            assertionFailure("Could not intantiate timezone, likely API error")
-            return .current
+            throw NSError(description: "Could not instantiate timezone, likely API error", code: 2)
         }
 
         return timeZone

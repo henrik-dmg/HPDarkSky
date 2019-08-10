@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Units: String {
+public enum Units: String, Codable {
     case imperial = "us"
     case metric = "si"
 

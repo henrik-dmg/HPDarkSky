@@ -24,7 +24,7 @@ public final class HPDarkSky {
             completion(nil, NSError.missingSecret)
             return
         }
-        
+
         if let pastDate = pastDate {
             if pastDate.timeIntervalSinceNow > 0.00 {
                 completion(nil, NSError.invalidRequestDate)

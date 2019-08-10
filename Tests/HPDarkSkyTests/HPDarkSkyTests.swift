@@ -39,7 +39,10 @@ final class HPDarkSkyTests: XCTestCase {
                 exp.fulfill()
                 return
             }
-            XCTAssertNil(forecast.currently)
+            XCTAssertNil(forecast.currently, "Current weather not excluded")
+            XCTAssertNil(forecast.minutely, "Minutely forecast not excluded")
+            XCTAssertNil(forecast.hourly, "Hourly forecast not excluded")
+            XCTAssertNil(forecast.daily, "Daily forecast not excluded")
             XCTAssertNil(error)
             exp.fulfill()
         }
@@ -53,8 +56,8 @@ final class HPDarkSkyTests: XCTestCase {
 
         HPDarkSky.shared.performRequest(request) { (forecast, error) in
             guard let forecast = forecast else {
-                XCTFail("No forecast returned")
                 XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+                XCTFail("No forecast returned")
                 exp.fulfill()
                 return
             }
