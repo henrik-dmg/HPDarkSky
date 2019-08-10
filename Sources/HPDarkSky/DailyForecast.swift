@@ -9,15 +9,15 @@ import Foundation
 
 public class DailyForecast: BasicForecast {
     let datapoints: [DailyDatapoint]
-    
+
     enum DailyCodingKeys: String, CodingKey {
         case datapoints = "data"
     }
-    
+
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DailyCodingKeys.self)
         self.datapoints = try container.decode([DailyDatapoint].self, forKey: .datapoints)
-        
+
         try super.init(from: decoder)
     }
 }
@@ -65,7 +65,7 @@ public class DailyDatapoint: BasicDatapoint {
     public let temperatureMinTime: Date
     /// The UNIX time of when the maximum uvIndex occurs during a given day.
     public let uvIndexTime: Double
-    
+
     enum DailyDataPointKeys: String, CodingKey {
         case apparentTemperatureHigh
         case apparentTemperatureHighTime
@@ -88,10 +88,10 @@ public class DailyDatapoint: BasicDatapoint {
         case temperatureMinTime
         case uvIndexTime
     }
-    
+
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DailyDataPointKeys.self)
-        
+
         self.apparentTemperatureHigh = try container.decode(Double.self, forKey: .apparentTemperatureHigh)
         self.apparentTemperatureHighTime = try container.decode(Date.self, forKey: .apparentTemperatureHighTime)
         self.apparentTemperatureLow = try container.decode(Double.self, forKey: .apparentTemperatureLow)

@@ -20,7 +20,7 @@ public class BasicDatapoint: Codable {
     let uvIndex: Int
     let visibility: Double
     let wind: Wind
-    
+
     enum CodingKeys: String, CodingKey {
         case cloudCover
         case dewPoint
@@ -35,10 +35,10 @@ public class BasicDatapoint: Codable {
         case visibility
         case wind
     }
-    
+
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         self.time = try container.decode(Date.self, forKey: .time)
         self.summary = try container.decode(String.self, forKey: .summary)
         self.icon = try container.decode(WeatherIcon.self, forKey: .icon)
