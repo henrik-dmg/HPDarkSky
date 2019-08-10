@@ -13,8 +13,8 @@ public struct DarkSkyResponse: Codable, CustomStringConvertible {
     public let location: CLLocationCoordinate2D
     public let timezone: TimeZone
     public let currently: WeatherDatapoint?
-    public let minutely: Forecast?
-    public let hourly: Forecast?
+    public let minutely: MinutelyForecast?
+    public let hourly: HourlyForecast?
     public let daily: DailyForecast?
     public let alerts: [Alert]?
     public var units: Units {
@@ -38,8 +38,8 @@ public struct DarkSkyResponse: Codable, CustomStringConvertible {
         self.location = try CLLocationCoordinate2D.decode(from: decoder)
         self.timezone = try TimeZone.decode(from: decoder)
         self.currently = try container.decodeIfPresent(WeatherDatapoint.self, forKey: .currently)
-        self.minutely = try container.decodeIfPresent(Forecast.self, forKey: .minutely)
-        self.hourly = try container.decodeIfPresent(Forecast.self, forKey: .hourly)
+        self.minutely = try container.decodeIfPresent(MinutelyForecast.self, forKey: .minutely)
+        self.hourly = try container.decodeIfPresent(HourlyForecast.self, forKey: .hourly)
         self.daily = try container.decodeIfPresent(DailyForecast.self, forKey: .daily)
         self.alerts = try container.decodeIfPresent([Alert].self, forKey: .alerts)
         self.flags = try container.decode(Flags.self, forKey: .flags)

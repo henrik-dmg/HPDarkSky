@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Forecast: Codable {
+public class BasicForecast: Codable {
     public let summary: String
     public let icon: WeatherIcon
 

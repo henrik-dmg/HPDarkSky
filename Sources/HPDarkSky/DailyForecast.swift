@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class DailyForecast: Forecast {
+public class DailyForecast: BasicForecast {
     let datapoints: [DailyDatapoint]
     
     enum DailyCodingKeys: String, CodingKey {
