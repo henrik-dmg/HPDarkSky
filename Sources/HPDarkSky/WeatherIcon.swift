@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// An enum providing native system icons based on the API response
 public enum WeatherIcon: String, Codable {
     case clearDay = "clear-day"
     case clearNight = "clear-night"
@@ -18,6 +19,9 @@ public enum WeatherIcon: String, Codable {
     case snow
     case wind
     case fog
+    case hail
+    case thunderstorm
+    case tornado
 }
 
 #if os(iOS) || os(tvOS)
@@ -25,11 +29,13 @@ import UIKit
 
 @available(iOS 13, tvOS 13, *)
 public extension WeatherIcon {
+    ///Returns a filled icon from the SF Symbols library
     @available(iOS 13, tvOS 13, *)
     func filledIcon(compatibleWith traitCollection: UITraitCollection?) -> UIImage {
         return makeIcon(filled: true, compatibleWith: traitCollection)
     }
 
+    ///Returns a hollow/line icon from the SF Symbols library
     @available(iOS 13, tvOS 13, *)
     func hollowIcon(compatibleWith traitCollection: UITraitCollection?) -> UIImage {
         return makeIcon(filled: false, compatibleWith: traitCollection)
@@ -59,6 +65,14 @@ public extension WeatherIcon {
             return UIImage(systemName: "wind")!
         case .fog:
             iconName = "cloud.fog"
+        case .hail:
+            iconName = "cloud.hail"
+        case .thunderstorm:
+            iconName = "cloud.bolt"
+        case .tornado:
+            return UIImage(systemName: "tornado")!
+        @unknown default:
+            return UIImage(systemName: "globe")!
         }
 
         if filled { iconName.append(".fill") }

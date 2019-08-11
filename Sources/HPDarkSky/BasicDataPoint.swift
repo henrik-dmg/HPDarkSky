@@ -7,19 +7,33 @@
 
 import Foundation
 
+///A datapoint object that contains the most basic information covered in almost every data block
 public class BasicDatapoint: Codable {
-    let cloudCover: Double
-    let dewPoint: Double
-    let humidity: Double
-    let icon: WeatherIcon
-    let ozone: Double
-    let precipitation: Precipitation
-    let pressure: Double
-    let summary: String
-    let time: Date
-    let uvIndex: Int
-    let visibility: Double
-    let wind: Wind
+    ///The percentage of sky occluded by clouds, between 0 and 1, inclusive.
+    public let cloudCover: Double
+    ///The dew point in degrees
+    public let dewPoint: Double
+    ///The relative humidity, between 0 and 1, inclusive.
+    public let humidity: Double
+    public let icon: WeatherIcon
+    ///The columnar density of total atmospheric ozone at the given time in Dobson units.
+    public let ozone: Double
+    ///The forecasted/observed precipiation
+    public let precipitation: Precipitation
+    ///The sea-level air pressure in millibars.
+    public let pressure: Double
+    ///A human-readable text summary of this data point.
+    ///(This property has millions of possible values, so don’t use it for automated purposes: use the icon property, instead!)
+    public let summary: String
+    ///The UNIX time at which this data point begins. minutely data point are always aligned to the top of the minute,
+    ///hourly data point objects to the top of the hour,
+    ///and daily data point objects to midnight of the day, all according to the local time zone.
+    public let time: Date
+    ///The UV index.
+    public let uvIndex: Int
+    ///The average visibility in miles, capped at 10 miles.
+    public let visibility: Double
+    public let wind: Wind
 
     enum CodingKeys: String, CodingKey {
         case cloudCover

@@ -8,12 +8,19 @@
 import Foundation
 
 public struct Alert: Codable {
+    ///A brief description of the alert
     public let title: String
+    ///The time at which the alert was issues
     public let timeStamp: Date
+    ///The UNIX time at which the alert will expire.
     public let expires: Date
+    ///A detailed description of the alert.
     public let description: String
-    public let url: String
+    ///A URL that one may refer to for detailed information about the alert.
+    public let url: URL
+    ///An array of strings representing the names of the regions covered by this weather alert.
     public let affectedRegions: [String]
+    ///The severity of the weather alert
     public let severity: AlertSeverity
 
     enum CodingKeys: String, CodingKey {
@@ -28,7 +35,10 @@ public struct Alert: Codable {
 }
 
 public enum AlertSeverity: String, Codable {
+    ///An individual should be aware of potentially severe weather
     case advisory
+    ///An individual should prepare for potentially severe weather
     case watch
+    ///An individual should take immediate action to protect themselves and others from potentially severe weather
     case warning
 }

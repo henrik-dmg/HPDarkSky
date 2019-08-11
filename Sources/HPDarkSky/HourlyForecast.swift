@@ -8,7 +8,7 @@
 import Foundation
 
 public class HourlyForecast: BasicForecast {
-    let datapoints: [HourlyDatapoint]
+    public let datapoints: [HourlyDatapoint]
 
     enum HourlyCodingKeys: String, CodingKey {
         case datapoints = "data"
@@ -24,9 +24,9 @@ public class HourlyForecast: BasicForecast {
 
 public class HourlyDatapoint: BasicDatapoint {
     /// The apparent (or “feels like”) temperature in degrees Fahrenheit.
-    let apparentTemperature: Double
+    public let apparentTemperature: Double
     /// The air temperature in degrees Fahrenheit.
-    let temperature: Double
+    public let temperature: Double
 
     enum HourlyDatapointKeys: String, CodingKey {
         case apparentTemperature

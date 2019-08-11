@@ -7,6 +7,7 @@
 
 import Foundation
 
+///A daily forecast which holds daily datapoints, which
 public class DailyForecast: BasicForecast {
     let datapoints: [DailyDatapoint]
 
@@ -25,45 +26,45 @@ public class DailyForecast: BasicForecast {
 public class DailyDatapoint: BasicDatapoint {
     /// The daytime high apparent temperature.
     public let apparentTemperatureHigh: Double
-    /// The UNIX time representing when the daytime high apparent temperature occurs.
+    /// The time representing when the daytime high apparent temperature occurs.
     public let apparentTemperatureHighTime: Date
     /// The overnight low apparent temperature.
     public let apparentTemperatureLow: Double
-    /// The UNIX time representing when the overnight low apparent temperature occurs.
+    /// The time representing when the overnight low apparent temperature occurs.
     public let apparentTemperatureLowTime: Date
     /// The maximum apparent temperature during a given date.
     public let apparentTemperatureMax: Double
-    /// The UNIX time representing when the maximum apparent temperature during a given date occurs.
+    /// The time representing when the maximum apparent temperature during a given date occurs.
     public let apparentTemperatureMaxTime: Date
     /// The minimum apparent temperature during a given date.
     public let apparentTemperatureMin: Double
-    /// The UNIX time representing when the minimum apparent temperature during a given date occurs.
+    /// The time representing when the minimum apparent temperature during a given date occurs.
     public let apparentTemperatureMinTime: Date
     /// The fractional part of the lunation number during the given day: a value of 0 corresponds to a new moon,
     /// 0.25 to a first quarter moon, 0.5 to a full moon, and 0.75 to a last quarter moon.
     /// (The ranges in between these represent waxing crescent, waxing gibbous, waning gibbous, and waning crescent moons, respectively.)
     public let moonPhase: Double
-    /// The UNIX time of when the sun will rise during a given day.
+    /// The time of when the sun will rise during a given day.
     public let sunriseTime: Date
-    /// The UNIX time of when the sun will set during a given day.
+    /// The time of when the sun will set during a given day.
     public let sunsetTime: Date
     /// The daytime high temperature.
     public let temperatureHigh: Double
-    /// The UNIX time representing when the daytime high temperature occurs.
+    /// The time representing when the daytime high temperature occurs.
     public let temperatureHighTime: Date
     /// The overnight low temperature.
     public let temperatureLow: Double
-    /// The UNIX time representing when the overnight low temperature occurs.
+    /// The time representing when the overnight low temperature occurs.
     public let temperatureLowTime: Date
     /// The maximum temperature during a given date.
     public let temperatureMax: Double
-    /// The UNIX time representing when the maximum temperature during a given date occurs.
+    /// The time representing when the maximum temperature during a given date occurs.
     public let temperatureMaxTime: Date
     /// The minimum temperature during a given date.
     public let temperatureMin: Double
-    /// The UNIX time representing when the minimum temperature during a given date occurs.
+    /// The time representing when the minimum temperature during a given date occurs.
     public let temperatureMinTime: Date
-    /// The UNIX time of when the maximum uvIndex occurs during a given day.
+    /// The time of when the maximum uvIndex occurs during a given day.
     public let uvIndexTime: Double
 
     enum DailyDataPointKeys: String, CodingKey {
