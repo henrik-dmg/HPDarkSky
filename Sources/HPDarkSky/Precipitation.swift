@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Precipitation: Codable {
+public struct Precipitation: Codable, Equatable {
     ///The intensity (in inches/centimeters of liquid water per hour) of precipitation occurring at the given time.
     ///This value is conditional on probability (that is, assuming any precipitation occurs at all).
     public let intensity: Double
@@ -49,7 +49,7 @@ public struct Precipitation: Codable {
     }
 }
 
-public enum PrecipitationType: String, Codable {
+public enum PrecipitationType: String, Codable, Equatable {
     ///Self-explanatory
     case rain
     ///Self-explanatory

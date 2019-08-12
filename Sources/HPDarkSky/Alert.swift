@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Alert: Codable {
+public struct Alert: Codable, Equatable {
     ///A brief description of the alert
     public let title: String
     ///The time at which the alert was issues
@@ -34,7 +34,7 @@ public struct Alert: Codable {
     }
 }
 
-public enum AlertSeverity: String, Codable {
+public enum AlertSeverity: String, Codable, Equatable {
     ///An individual should be aware of potentially severe weather
     case advisory
     ///An individual should prepare for potentially severe weather

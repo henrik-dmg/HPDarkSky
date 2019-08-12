@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-public struct DarkSkyResponse: Codable, CustomStringConvertible {
+public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
     ///A flags object containing miscellaneous metadata about the request.
     public let flags: Flags
     ///The requested location

@@ -22,7 +22,11 @@ public class MinutelyForecast: BasicForecast {
     }
 }
 
-public class MinutelyDatapoint: Codable {
+public class MinutelyDatapoint: Codable, Equatable {
+    public static func == (lhs: MinutelyDatapoint, rhs: MinutelyDatapoint) -> Bool {
+        return (lhs.time == rhs.time && lhs.precipitation == rhs.precipitation)
+    }
+    
     public let time: Date
     public let precipitation: Precipitation
 

@@ -8,7 +8,7 @@
 import Foundation
 
 ///The flags object contains various metadata information related to the request
-public struct Flags: Codable {
+public struct Flags: Codable, Equatable {
     ///Indicates the units which were used for the data in this request.
     public let units: Units
     ///[data source]https://darksky.net/dev/docs/sources "See list of data sources"

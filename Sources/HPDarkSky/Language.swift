@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Language: String {
+public enum Language: String, Equatable {
     case arabic = "ar"
     case azerbaijani = "az"
     case belarusian = "be"

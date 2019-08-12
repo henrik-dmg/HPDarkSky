@@ -8,7 +8,23 @@
 import Foundation
 
 ///A datapoint object that contains the most basic information covered in almost every data block
-public class BasicDatapoint: Codable {
+public class BasicDatapoint: Codable, Equatable {
+    public static func == (lhs: BasicDatapoint, rhs: BasicDatapoint) -> Bool {
+        return
+            lhs.precipitation == rhs.precipitation &&
+            lhs.cloudCover == rhs.cloudCover &&
+            lhs.dewPoint == rhs.dewPoint &&
+            lhs.humidity == rhs.humidity &&
+            lhs.icon == rhs.icon &&
+            lhs.ozone == rhs.ozone &&
+            lhs.pressure == rhs.pressure &&
+            lhs.summary == rhs.summary &&
+            lhs.time == rhs.time &&
+            lhs.uvIndex == rhs.uvIndex &&
+            lhs.visibility == rhs.visibility &&
+            lhs.wind == rhs.wind
+    }
+    
     ///The percentage of sky occluded by clouds, between 0 and 1, inclusive.
     public let cloudCover: Double
     ///The dew point in degrees
