@@ -28,33 +28,34 @@ final class HPDarkSkyTests: XCTestCase {
         XCTAssertTrue(goodLocation.isValidLocation, "Location was falsely evaluated as invalid")
     }
     
-    func testCodableModel() {
-        var request = makeRequestObject()
-        request.excludedFields = ExcludableFields.allCases
-        let exp = expectation(description: "fetched forecast from server")
-        
-        HPDarkSky.shared.performRequest(request) { forecast, error in
-            guard let forecast = forecast else {
-                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
-                XCTFail("No forecast returned")
-                exp.fulfill()
-                return
-            }
-            
-            do {
-                let encoder = JSONEncoder()
-                encoder.dateEncodingStrategy = .secondsSince1970
-                let data = try encoder.encode(forecast)
-                
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .secondsSince1970
-                let newForecast = try decoder.decode(DarkSkyResponse.self, from: data)
-                XCTAssertEqual(forecast, newForecast)
-            } catch {
-                XCTFail("Could not decode or encode forecast object")
-            }
-        }
-    }
+//    func testCodableModel() {
+//        var request = makeRequestObject()
+//        request.excludedFields = ExcludableFields.allCases
+//        let exp = expectation(description: "fetched forecast from server")
+//
+//        let test = DarkSkyResponse.test
+//        HPDarkSky.shared.performRequest(request) { forecast, error in
+//            guard let forecast = forecast else {
+//                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+//                XCTFail("No forecast returned")
+//                exp.fulfill()
+//                return
+//            }
+//
+//            do {
+//                let encoder = JSONEncoder()
+//                encoder.dateEncodingStrategy = .secondsSince1970
+//                let data = try encoder.encode(forecast)
+//
+//                let decoder = JSONDecoder()
+//                decoder.dateDecodingStrategy = .secondsSince1970
+//                let newForecast = try decoder.decode(DarkSkyResponse.self, from: data)
+//                XCTAssertEqual(forecast, newForecast)
+//            } catch {
+//                XCTFail("Could not decode or encode forecast object")
+//            }
+//        }
+//    }
 
     func testExcludingAll() {
         var request = makeRequestObject()
@@ -106,6 +107,6 @@ final class HPDarkSkyTests: XCTestCase {
         "testBasicRequest": testBasicRequest,
         "testExcludingCurrently": testExcludingAll,
         "testCrazyLocation": testCrazyLocation,
-        "testCodableModel": testCodableModel
+        //"testCodableModel": testCodableModel
     ]
 }
