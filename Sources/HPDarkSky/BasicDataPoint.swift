@@ -83,3 +83,20 @@ public class BasicDatapoint: Codable, Equatable {
         self.precipitation = try Precipitation.decode(from: decoder)
     }
 }
+
+public class CurrentDatapoint: BasicDatapoint {
+    /// The current temperature
+    public let temperature: Double
+
+    enum CurrentDatapointKeys: String, CodingKey {
+        case temperature
+    }
+
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CurrentDatapointKeys.self)
+
+        self.temperature = try container.decode(Double.self, forKey: .temperature)
+        try super.init(from: decoder)
+    }
+}
+

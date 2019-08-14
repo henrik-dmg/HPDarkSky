@@ -16,7 +16,7 @@ public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
     ///The timezone for the requested location.
     public let timezone: TimeZone
     ///A data point containing the current weather conditions at the requested location.
-    public let currently: BasicDatapoint?
+    public let currently: CurrentDatapoint?
     ///A data block containing the weather conditions minute-by-minute for the next hour.
     public let minutely: MinutelyForecast?
     ///A data block containing the weather conditions hour-by-hour for the next two days.
@@ -42,7 +42,7 @@ public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
 
         self.location = try CLLocationCoordinate2D.decode(from: decoder)
         self.timezone = try TimeZone.decode(from: decoder)
-        self.currently = try container.decodeIfPresent(BasicDatapoint.self, forKey: .currently)
+        self.currently = try container.decodeIfPresent(CurrentDatapoint.self, forKey: .currently)
         self.minutely = try container.decodeIfPresent(MinutelyForecast.self, forKey: .minutely)
         self.hourly = try container.decodeIfPresent(HourlyForecast.self, forKey: .hourly)
         self.daily = try container.decodeIfPresent(DailyForecast.self, forKey: .daily)
