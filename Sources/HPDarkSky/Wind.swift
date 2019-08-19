@@ -7,6 +7,7 @@
 
 import Foundation
 
+///Type holding information about the wind, such as speed, bearing and gust
 public struct Wind: Codable, Equatable {
     public let speed: Double
     public let gust: Double

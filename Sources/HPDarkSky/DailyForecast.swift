@@ -7,7 +7,7 @@
 
 import Foundation
 
-///A daily forecast which holds daily datapoints, which
+///A daily forecast which holds daily datapoints
 public class DailyForecast: BasicForecast {
     let datapoints: [DailyDatapoint]
 

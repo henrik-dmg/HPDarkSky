@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Enum to specify the language used in a weather response
 public enum Language: String, Equatable {
     case arabic = "ar"
     case azerbaijani = "az"
@@ -60,5 +61,6 @@ public enum Language: String, Equatable {
     case simplifiedChinese = "zh"
     case traditionalChinese = "zh-tw"
 
+    ///Returns Language.english
     public static let `default`: Language = Language.english
 }

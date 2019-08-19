@@ -7,6 +7,7 @@
 
 import Foundation
 
+///Type holding information about precipitation, such as snow/rain/etc.
 public struct Precipitation: Codable, Equatable {
     ///The intensity (in inches/centimeters of liquid water per hour) of precipitation occurring at the given time.
     ///This value is conditional on probability (that is, assuming any precipitation occurs at all).

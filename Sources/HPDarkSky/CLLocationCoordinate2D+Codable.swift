@@ -40,15 +40,19 @@ extension CLLocationCoordinate2D: Codable, Equatable {
             longitude: try locationContainer.decode(Double.self, forKey: .longitude))
 
     }
+}
 
-    public static func validated(latitude: Double, longitude: Double) -> CLLocationCoordinate2D? {
+public extension CLLocationCoordinate2D {
+    ///Returns a 'safe' CLLocationCoordinate2D. Nil will be returned if either longitude or latitude are out of bounds
+    static func validated(latitude: Double, longitude: Double) -> CLLocationCoordinate2D? {
         guard latitude.isValidLatitude && longitude.isValidLongitude else {
             return nil
         }
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 
-    public var isValidLocation: Bool {
+    ///Boolean indicating wether the initialised coordinates are valid
+    var isValidLocation: Bool {
         return latitude.isValidLatitude && longitude.isValidLongitude
     }
 }

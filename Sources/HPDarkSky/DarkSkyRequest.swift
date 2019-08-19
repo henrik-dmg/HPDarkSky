@@ -17,17 +17,20 @@ public struct DarkSkyRequest {
     ///The language to be used in the response's summary texts
     public var language: Language = .english
     ///The units to be used in the response's data
-    public var units: Units = .metric
+    public var units: WeatherUnits = .metric
     ///An optional date to perform a Time Machine request
     public var date: Date?
     ///The required API secret
     private let secret: String
 
-    public init(secret: String, location: CLLocationCoordinate2D, date: Date? = nil, excludedFields: [ExcludableFields] = []) {
+    ///Constructs a new request object
+    public init(secret: String, location: CLLocationCoordinate2D, date: Date? = nil, excludedFields: [ExcludableFields] = [], units: WeatherUnits = .metric, language: Language = .english) {
         self.secret = secret
         self.date = date
         self.excludedFields = excludedFields
         self.location = location
+        self.units = units
+        self.language = language
     }
 
     ///Constructs the URL to request
@@ -64,6 +67,7 @@ public struct DarkSkyRequest {
     }
 }
 
+///Enum to exclude certain fields from the weather response
 public enum ExcludableFields: String, RawRepresentable, CaseIterable {
     case currently
     case minutely
@@ -72,9 +76,13 @@ public enum ExcludableFields: String, RawRepresentable, CaseIterable {
     case alerts
 }
 
-// TODO:
 public extension URLSession {
-    func dataTask(with request: DarkSkyRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        return self.dataTask(with: request.makeURL()!, completionHandler: completionHandler)
+    ///Creates a task that retrieves the contents of the specified request,
+    ///then calls a handler upon completion.
+    func dataTask(with request: DarkSkyRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask? {
+        guard let url = request.makeURL() else {
+            return nil
+        }
+        return self.dataTask(with: url, completionHandler: completionHandler)
     }
 }

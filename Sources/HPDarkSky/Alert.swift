@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Type holding information about weather alerts such as thunderstorms
 public struct Alert: Codable, Equatable {
     ///A brief description of the alert
     public let title: String
@@ -34,6 +35,7 @@ public struct Alert: Codable, Equatable {
     }
 }
 
+/// Enum specifying the severity of a weather alert
 public enum AlertSeverity: String, Codable, Equatable {
     ///An individual should be aware of potentially severe weather
     case advisory

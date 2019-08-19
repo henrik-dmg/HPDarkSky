@@ -7,9 +7,10 @@
 
 import Foundation
 
-public enum Units: String, Codable, Equatable {
+
+public enum WeatherUnits: String, Codable, Equatable {
     case imperial = "us"
     case metric = "si"
 
-    public static let `default`: Units = .metric
+    public static let `default`: WeatherUnits = .metric
 }

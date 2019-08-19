@@ -27,6 +27,9 @@ public class MinutelyDatapoint: Codable, Equatable {
         return (lhs.time == rhs.time && lhs.precipitation == rhs.precipitation)
     }
     
+    ///The UNIX time at which this data point begins. minutely data point are always aligned to the top of the minute,
+    ///hourly data point objects to the top of the hour,
+    ///and daily data point objects to midnight of the day, all according to the local time zone.
     public let time: Date
     public let precipitation: Precipitation
 

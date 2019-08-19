@@ -7,6 +7,7 @@
 
 import Foundation
 
+///An hourly forecast which holds hourly datapoints
 public class HourlyForecast: BasicForecast {
     public let datapoints: [HourlyDatapoint]
 
