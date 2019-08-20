@@ -9,30 +9,6 @@ import Foundation
 
 ///A datapoint that holds basic information and also the current temperature
 public struct CurrentDatapoint: Codable, Equatable {
-    public static func == (lhs: CurrentDatapoint, rhs: CurrentDatapoint) -> Bool {
-        return lhs.windSpeed == rhs.windSpeed &&
-            lhs.windGust == rhs.windGust &&
-            lhs.windBearing == rhs.windBearing &&
-            lhs.windGustTime == rhs.windGustTime &&
-            lhs.precipIntensity == rhs.precipIntensity &&
-            lhs.precipIntensityError == rhs.precipIntensityError &&
-            lhs.precipProbability == rhs.precipProbability &&
-            lhs.precipType == rhs.precipType &&
-            lhs.precipIntensityMax == rhs.precipIntensityMax &&
-            lhs.precipIntensityMaxTime == rhs.precipIntensityMaxTime &&
-            lhs.precipAccumulation == rhs.precipAccumulation &&
-            lhs.temperature == rhs.temperature &&
-            lhs.cloudCover == rhs.cloudCover &&
-            lhs.dewPoint == rhs.dewPoint &&
-            lhs.humidity == rhs.humidity &&
-            lhs.icon == rhs.icon &&
-            lhs.ozone == rhs.ozone &&
-            lhs.pressure == rhs.pressure &&
-            lhs.summary == rhs.summary &&
-            lhs.time == rhs.time &&
-            lhs.uvIndex == rhs.uvIndex &&
-            lhs.visibility == rhs.visibility
-    }
     /// The current temperature
     public let temperature: Double
     ///The percentage of sky occluded by clouds, between 0 and 1, inclusive.

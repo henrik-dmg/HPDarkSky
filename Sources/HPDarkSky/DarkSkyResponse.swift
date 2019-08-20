@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
+public struct DarkSkyResponse: Codable, Equatable {
     ///A flags object containing miscellaneous metadata about the request.
     public let flags: Flags
     ///The requested location
@@ -45,10 +45,5 @@ public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
         case longitude
         case latitude
         case timezoneIdentifier = "timezone"
-    }
-
-    public var description: String {
-        let className = type(of: self)
-        return "\(className)(location: \(location), timeZone: \(timezone.identifier))"
     }
 }
