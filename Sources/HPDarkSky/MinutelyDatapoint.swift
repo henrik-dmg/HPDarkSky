@@ -7,21 +7,6 @@
 
 import Foundation
 
-public class MinutelyForecast: BasicForecast {
-    public let datapoints: [MinutelyDatapoint]
-
-    enum MinutelyCodingKeys: String, CodingKey {
-        case datapoints = "data"
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: MinutelyCodingKeys.self)
-        self.datapoints = try container.decode([MinutelyDatapoint].self, forKey: .datapoints)
-
-        try super.init(from: decoder)
-    }
-}
-
 public struct MinutelyDatapoint: Codable, Equatable {
     ///The UNIX time at which this data point begins. minutely data point are always aligned to the top of the minute,
     ///hourly data point objects to the top of the hour,

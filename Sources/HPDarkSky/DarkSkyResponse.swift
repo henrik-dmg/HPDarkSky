@@ -9,7 +9,6 @@ import Foundation
 import CoreLocation
 
 public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
-
     ///A flags object containing miscellaneous metadata about the request.
     public let flags: Flags
     ///The requested location
@@ -23,11 +22,11 @@ public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
     ///A data point containing the current weather conditions at the requested location.
     public let currently: CurrentDatapoint?
     ///A data block containing the weather conditions minute-by-minute for the next hour.
-    public let minutely: MinutelyForecast?
+    public let minutely: Forecast<MinutelyDatapoint>?
     ///A data block containing the weather conditions hour-by-hour for the next two days.
-    public let hourly: HourlyForecast?
+    public let hourly: Forecast<HourlyDatapoint>?
     ///A data block containing the weather conditions day-by-day for the next week.
-    public let daily: DailyForecast?
+    public let daily: Forecast<DailyDatapoint>?
     ///An alerts array, which, if present, contains any severe weather alerts pertinent to the requested location.
     public let alerts: [Alert]?
 
@@ -46,20 +45,6 @@ public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
         case longitude
         case latitude
         case timezoneIdentifier = "timezone"
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        self.longitude = try container.decode(Double.self, forKey: .longitude)
-        self.latitude = try container.decode(Double.self, forKey: .latitude)
-        self.timezoneIdentifier = try container.decode(String.self, forKey: .timezoneIdentifier)
-        self.currently = try container.decodeIfPresent(CurrentDatapoint.self, forKey: .currently)
-        self.minutely = try container.decodeIfPresent(MinutelyForecast.self, forKey: .minutely)
-        self.hourly = try container.decodeIfPresent(HourlyForecast.self, forKey: .hourly)
-        self.daily = try container.decodeIfPresent(DailyForecast.self, forKey: .daily)
-        self.alerts = try container.decodeIfPresent([Alert].self, forKey: .alerts)
-        self.flags = try container.decode(Flags.self, forKey: .flags)
     }
 
     public var description: String {

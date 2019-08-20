@@ -7,22 +7,6 @@
 
 import Foundation
 
-///An hourly forecast which holds hourly datapoints
-public class HourlyForecast: BasicForecast {
-    public let datapoints: [HourlyDatapoint]
-
-    enum HourlyCodingKeys: String, CodingKey {
-        case datapoints = "data"
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: HourlyCodingKeys.self)
-        self.datapoints = try container.decode([HourlyDatapoint].self, forKey: .datapoints)
-
-        try super.init(from: decoder)
-    }
-}
-
 public struct HourlyDatapoint: Codable, Equatable {
     /// The apparent (or “feels like”) temperature in degrees Fahrenheit.
     public let apparentTemperature: Double

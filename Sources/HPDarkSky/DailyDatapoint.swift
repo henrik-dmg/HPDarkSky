@@ -7,22 +7,6 @@
 
 import Foundation
 
-///A daily forecast which holds daily datapoints
-public class DailyForecast: BasicForecast {
-    let datapoints: [DailyDatapoint]
-
-    enum DailyCodingKeys: String, CodingKey {
-        case datapoints = "data"
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: DailyCodingKeys.self)
-        self.datapoints = try container.decode([DailyDatapoint].self, forKey: .datapoints)
-
-        try super.init(from: decoder)
-    }
-}
-
 public struct DailyDatapoint: Codable, Equatable {
     /// The daytime high apparent temperature.
     public let apparentTemperatureHigh: Double
