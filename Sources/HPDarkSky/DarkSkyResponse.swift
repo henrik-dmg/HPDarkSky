@@ -9,12 +9,17 @@ import Foundation
 import CoreLocation
 
 public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
+
     ///A flags object containing miscellaneous metadata about the request.
     public let flags: Flags
     ///The requested location
-    public let location: CLLocationCoordinate2D
+    public var location: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
     ///The timezone for the requested location.
-    public let timezone: TimeZone
+    public var timezone: TimeZone {
+        return TimeZone(identifier: timezoneIdentifier)!
+    }
     ///A data point containing the current weather conditions at the requested location.
     public let currently: CurrentDatapoint?
     ///A data block containing the weather conditions minute-by-minute for the next hour.
@@ -26,22 +31,29 @@ public struct DarkSkyResponse: Codable, CustomStringConvertible, Equatable {
     ///An alerts array, which, if present, contains any severe weather alerts pertinent to the requested location.
     public let alerts: [Alert]?
 
+    //Internal vars to conform to Codable
+    let longitude: Double
+    let latitude: Double
+    let timezoneIdentifier: String
+
     enum CodingKeys: String, CodingKey {
-        case location
-        case timezone
         case currently
         case minutely
         case hourly
         case daily
         case alerts
         case flags
+        case longitude
+        case latitude
+        case timezoneIdentifier = "timezone"
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.location = try CLLocationCoordinate2D.decode(from: decoder)
-        self.timezone = try TimeZone.decode(from: decoder)
+        self.longitude = try container.decode(Double.self, forKey: .longitude)
+        self.latitude = try container.decode(Double.self, forKey: .latitude)
+        self.timezoneIdentifier = try container.decode(String.self, forKey: .timezoneIdentifier)
         self.currently = try container.decodeIfPresent(CurrentDatapoint.self, forKey: .currently)
         self.minutely = try container.decodeIfPresent(MinutelyForecast.self, forKey: .minutely)
         self.hourly = try container.decodeIfPresent(HourlyForecast.self, forKey: .hourly)

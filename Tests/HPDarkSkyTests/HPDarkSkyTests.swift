@@ -75,8 +75,8 @@ final class HPDarkSkyTests: XCTestCase {
 
     static var allTests = [
         ("testSecretExistsInEnvironment", testSecretExistsInEnvironment),
+        ("testCrazyLocation", testCrazyLocation),
         ("testBasicRequest", testBasicRequest),
-        ("testExcludingCurrently", testExcludingAll),
-        ("testCrazyLocation", testCrazyLocation)
+        ("testExcludingAll", testExcludingAll)
     ]
 }

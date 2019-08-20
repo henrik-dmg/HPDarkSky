@@ -20,7 +20,7 @@ public final class HPDarkSky {
         self.language = language
         self.units = units
     }
-    
+
     /// Performs a pre-specified request and returns the result
     /// - Parameter request: The request that will be used to fetch weather data
     /// - Parameter completion: The completion handler which returns an error or forecast
@@ -49,7 +49,7 @@ public final class HPDarkSky {
             completion(nil, NSError.invalidLocation)
             return
         }
-        
+
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let json = data, error == nil else {
                 completion(nil, error)

@@ -18,10 +18,4 @@ public struct Flags: Codable, Equatable {
     ///Note, however, that many other stations may have also been used; this value is primarily for debugging purposes.
     ///This property's value is in miles (if US units are selected) or kilometers (if SI units are selected).
     public let nearestStation: Double?
-
-    enum CodingKeys: String, CodingKey {
-        case units
-        case sources
-        case nearestStation
-    }
 }

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum WeatherUnits: String, Codable, Equatable {
     case imperial = "us"
     case metric = "si"

@@ -22,25 +22,29 @@ public class MinutelyForecast: BasicForecast {
     }
 }
 
-public class MinutelyDatapoint: Codable, Equatable {
-    public static func == (lhs: MinutelyDatapoint, rhs: MinutelyDatapoint) -> Bool {
-        return (lhs.time == rhs.time && lhs.precipitation == rhs.precipitation)
-    }
-    
+public struct MinutelyDatapoint: Codable, Equatable {
     ///The UNIX time at which this data point begins. minutely data point are always aligned to the top of the minute,
     ///hourly data point objects to the top of the hour,
     ///and daily data point objects to midnight of the day, all according to the local time zone.
     public let time: Date
-    public let precipitation: Precipitation
+    ///The forecasted/observed precipiation
+    public var precipitation: Precipitation {
+        return Precipitation(
+            intensity: precipIntensity,
+            error: precipIntensityError,
+            probability: precipProbability,
+            type: precipType,
+            maxIntensity: precipIntensityMax,
+            maxIntensityTime: precipIntensityMaxTime,
+            accumulation: precipAccumulation)
+    }
 
-    enum CodingKeys: String, CodingKey {
-        case time
-        case precipitation
-    }
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.time = try container.decode(Date.self, forKey: .time)
-        self.precipitation = try Precipitation.decode(from: decoder)
-    }
+    //Internal types to conform to COdable
+    let precipIntensity: Double
+    let precipIntensityError: Double?
+    let precipProbability: Double
+    let precipType: PrecipitationType?
+    let precipIntensityMax: Double?
+    let precipIntensityMaxTime: Date?
+    let precipAccumulation: Double?
 }
