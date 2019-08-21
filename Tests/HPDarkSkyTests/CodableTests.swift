@@ -84,8 +84,8 @@ final class CodableTests: XCTestCase {
             XCTFail(err.localizedDescription)
         }
     }
-    
-    func testForecast() {
+
+    func testMinutelyForecast() {
         let datapoints = [
             MinutelyDatapoint(
                 time: Date(),
@@ -97,11 +97,28 @@ final class CodableTests: XCTestCase {
                 precipIntensityMaxTime: nil,
                 precipAccumulation: 012.2)
         ]
+
         let forecast = Forecast<MinutelyDatapoint>(summary: "asdasldas", icon: .cloudy, data: datapoints)
-        
+
         do {
             let data = try encoder.encode(forecast)
             let loaded = try decoder.decode(Forecast<MinutelyDatapoint>.self, from: data)
+            XCTAssertEqual(forecast, loaded)
+        } catch let err {
+            XCTFail(err.localizedDescription)
+        }
+    }
+
+    func testDailyForecast() {
+        let datapoints = [
+            DailyDatapoint(apparentTemperatureHigh: 10, apparentTemperatureHighTime: Date(), apparentTemperatureLow: 10, apparentTemperatureLowTime: Date(), apparentTemperatureMax: 10.00, apparentTemperatureMaxTime: Date(), apparentTemperatureMin: 120312.1231, apparentTemperatureMinTime: Date(), moonPhase: 202.2, sunriseTime: Date(), sunsetTime: Date(), temperatureHigh: 202.2, temperatureHighTime: Date(), temperatureLow: 202.2, temperatureLowTime: Date(), temperatureMax: 202.2, temperatureMaxTime: Date(), temperatureMin: 202.2, temperatureMinTime: Date(), uvIndexTime: 202.2, cloudCover: 202.2, dewPoint: 202.2, humidity: 202.2, icon: .partlyCloudyDay, ozone: 202.2, pressure: 202.2, summary: "Generic summary", time: Date(), uvIndex: 10, visibility: 102312.2, windSpeed: 202.2, windGust: 202.2, windBearing: 356, windGustTime: nil, precipIntensity: 102312.2, precipIntensityError: 202.2, precipProbability: 102312.2, precipType: .snow, precipIntensityMax: nil, precipIntensityMaxTime: nil, precipAccumulation: 102312.2)
+        ]
+
+        let forecast = Forecast<DailyDatapoint>(summary: "asdasldas", icon: .cloudy, data: datapoints)
+
+        do {
+            let data = try encoder.encode(forecast)
+            let loaded = try decoder.decode(Forecast<DailyDatapoint>.self, from: data)
             XCTAssertEqual(forecast, loaded)
         } catch let err {
             XCTFail(err.localizedDescription)
@@ -146,6 +163,8 @@ final class CodableTests: XCTestCase {
     static var allTests = [
         ("testCurrentDatapointCodable", testCurrentDatapointCodable),
         ("testAPIErrorCodable", testAPIErrorCodable),
-        ("testAlertCodable", testAlertCodable)
+        ("testAlertCodable", testAlertCodable),
+        ("testMinutelyForecast", testMinutelyForecast),
+        ("testDailyForecast", testDailyForecast)
     ]
 }
