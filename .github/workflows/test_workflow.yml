@@ -11,5 +11,5 @@ jobs:
     - uses: actions/checkout@v1
     - name: Swift tests
       run: |
-        export TEST_SECRET=$DARKSKY_SECRET
+        export TEST_SECRET="$DARKSKY_SECRET"
         swift test
