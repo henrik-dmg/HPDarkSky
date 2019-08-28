@@ -10,7 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Swift tests
-      env: TEST_SECRET=${{ secrets.DARKSKY_SECRET }}
+      env: 
+        TEST_SECRET: ${{ secrets.DARKSKY_SECRET }}
       run: |
         echo "Starting swift builds"
         swift test
