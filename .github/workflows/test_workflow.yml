@@ -10,4 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
-      run: swift test
+      run: |
+      export TEST_SECRET=$DARKSKY_SECRET
+      swift test
