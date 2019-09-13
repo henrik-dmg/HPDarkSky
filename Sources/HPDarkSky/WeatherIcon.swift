@@ -13,15 +13,15 @@ public enum WeatherIcon: String, Codable, Equatable, CaseIterable {
     case clearNight = "clear-night"
     case partlyCloudyDay = "partly-cloudy-day"
     case partlyCloudyNight = "partly-cloudy-night"
-    case cloudy
-    case rain
-    case sleet
-    case snow
-    case wind
-    case fog
-    case hail
-    case thunderstorm
-    case tornado
+    case cloudy = "cloudy"
+    case rain = "rain"
+    case sleet = "sleet"
+    case snow = "snow"
+    case wind = "wind"
+    case fog = "fog"
+    case hail = "hail"
+    case thunderstorm = "thunderstorm"
+    case tornado = "tornado"
 }
 
 #if os(iOS) || os(tvOS)

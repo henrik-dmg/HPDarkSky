@@ -58,7 +58,7 @@ public final class HPDarkSky {
 
             do {
                 let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .secondsSince1970
+                //decoder.dateDecodingStrategy = .secondsSince1970
 
                 if let apiError = try? decoder.decode(APIError.self, from: json) {
                     completion(nil, apiError.makeNSError())
