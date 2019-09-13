@@ -70,16 +70,11 @@ final class CodableTests: XCTestCase {
     }
     
     func testIconCodable() throws {
-        WeatherIcon.allCases.forEach { icon in
-            do {
-                let data = try encoder.encode(icon)
-                let loaded = try decoder.decode(WeatherIcon.self, from: data)
+        let icon = WeatherIcon.partlyCloudyNight
+        let data = try encoder.encode(icon)
+        let loaded = try decoder.decode(WeatherIcon.self, from: data)
 
-                XCTAssertEqual(icon, loaded)
-            } catch let err {
-                XCTFail(err.localizedDescription)
-            }
-        }
+        XCTAssertEqual(icon, loaded)
     }
 
     func testCurrentDatapointCodable() throws {
