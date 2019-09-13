@@ -13,5 +13,6 @@ jobs:
       env: 
         TEST_SECRET: ${{ secrets.DARKSKY_SECRET }}
       run: |
-        echo "Starting swift builds"
+        /usr/bin/xcodebuild -version
+        swift -version
         swift test
