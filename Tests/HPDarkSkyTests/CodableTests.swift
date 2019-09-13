@@ -50,6 +50,15 @@ final class CodableTests: XCTestCase {
 
         XCTAssertEqual(apiError, loaded)
     }
+    
+    func testPrecipitationCodable() throws {
+        let precip = Precipitation(intensity: 100, error: nil, probability: 86, type: .sleet, maxIntensity: 300, maxIntensityTime: Date.distantPast, accumulation: 1200)
+        
+        let data = try encoder.encode(precip)
+        let loaded = try decoder.decode(Precipitation.self, from: data)
+
+        XCTAssertEqual(precip, loaded)
+    }
 
     func testCurrentDatapointCodable() {
         let current = CurrentDatapoint(
