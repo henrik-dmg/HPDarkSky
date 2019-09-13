@@ -70,7 +70,7 @@ final class CodableTests: XCTestCase {
     }
     
     func testIconEncode() throws {
-        try encoder.encode(WeatherIcon.partlyCloudyNight)
+        _ = try encoder.encode(WeatherIcon.fog)
     }
     
     func testIconCodable() throws {
