@@ -12,7 +12,7 @@ final class CodableTests: XCTestCase {
     var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         //decoder.dateDecodingStrategy = .secondsSince1970
-        return decoder
+        return decoder          
     }
 
     func makeRequestObject() -> DarkSkyRequest {

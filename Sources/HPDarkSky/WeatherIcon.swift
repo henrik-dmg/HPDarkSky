@@ -8,7 +8,7 @@
 import Foundation
 
 /// An enum providing native system icons based on the API response
-public enum WeatherIcon: String, Codable, Equatable, CaseIterable {
+public enum WeatherIcon: String, Codable, CaseIterable {
     case clearDay = "clear-day"
     case clearNight = "clear-night"
     case partlyCloudyDay = "partly-cloudy-day"
