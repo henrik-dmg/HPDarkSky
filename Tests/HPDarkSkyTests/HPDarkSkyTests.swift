@@ -6,8 +6,11 @@ final class HPDarkSkyTests: XCTestCase {
 
     func makeRequestObject() -> DarkSkyRequest {
         guard let envSecret = TestSecret.secret else {
-            fatalError("Could not find secret")
-
+            print("--- Could not find API secret ---")
+            return DarkSkyRequest(
+                secret: "faulty-secret",
+                location: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+                excludedFields: [])
         }
         return DarkSkyRequest(
             secret: envSecret,
