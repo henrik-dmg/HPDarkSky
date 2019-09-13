@@ -21,6 +21,12 @@ final class HPDarkSkyTests: XCTestCase {
     func testSecretExistsInEnvironment() {
         XCTAssertNotNil(TestSecret.secret, "Secret was not set as env variable")
     }
+    
+    func testMakeAPIError() {
+        let error = APIError(code: 420, error: "Some error message")
+        
+        XCTAssertEqual(error.makeNSError().code, 420)
+    }
 
     func testCrazyLocation() {
         let crazyLocation = CLLocationCoordinate2D(latitude: 200, longitude: 300)
