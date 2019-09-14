@@ -5,12 +5,14 @@ import CoreLocation
 final class CodableTests: XCTestCase {
     var encoder: JSONEncoder {
         let encoder = JSONEncoder()
+        encoder.dataEncodingStrategy = .deferredToData
         //encoder.dateEncodingStrategy = .secondsSince1970
         return encoder
     }
 
     var decoder: JSONDecoder {
         let decoder = JSONDecoder()
+        decoder.dataDecodingStrategy = .deferredToData
         //decoder.dateDecodingStrategy = .secondsSince1970
         return decoder          
     }
@@ -59,20 +61,30 @@ final class CodableTests: XCTestCase {
     }
 
     func testIconCodable() throws {
+        struct Wrapper: Codable, Equatable {
+            let icon: WeatherIcon
+        }
+        
         try WeatherIcon.allCases.forEach { icon in
-            let data = try encoder.encode(icon)
-            let loaded = try decoder.decode(WeatherIcon.self, from: data)
+            let wrap = Wrapper(icon: icon)
+            let data = try encoder.encode(wrap)
+            let loaded = try decoder.decode(Wrapper.self, from: data)
 
-            XCTAssertEqual(icon, loaded)
+            XCTAssertEqual(wrap, loaded)
         }
     }
     
     func testLanguageCodable() throws {
+        struct Wrapper: Codable, Equatable {
+            let lang: Language
+        }
+        
         try Language.allCases.forEach { lang in
-            let data = try encoder.encode(lang)
-            let loaded = try decoder.decode(Language.self, from: data)
+            let wrap = Wrapper(lang: lang)
+            let data = try encoder.encode(wrap)
+            let loaded = try decoder.decode(Wrapper.self, from: data)
 
-            XCTAssertEqual(lang, loaded)
+            XCTAssertEqual(wrap, loaded)
         }
     }
 
