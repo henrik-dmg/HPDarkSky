@@ -8,7 +8,7 @@
 import Foundation
 
 /// Enum to specify the language used in a weather response
-public enum Language: String, Equatable {
+public enum Language: String, Codable, Equatable, CaseIterable {
     case arabic = "ar"
     case azerbaijani = "az"
     case belarusian = "be"
