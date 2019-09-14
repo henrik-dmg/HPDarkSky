@@ -4,6 +4,4 @@
 /*.xcodeproj
 xcuserdata/
 DerivedData/
-ResultsBundle.xcresult/*
-ResultsBundle.xcresult/
-
+ResultBundle.xcresult
