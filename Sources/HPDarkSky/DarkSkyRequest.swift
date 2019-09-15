@@ -47,7 +47,8 @@ public struct DarkSkyRequest {
     private func makeURLPath() -> String {
         var basePath = "/forecast/\(secret)/\(location.latitude),\(location.longitude)"
         if let date = date {
-            basePath.append("\(date.timeIntervalSince1970)")
+            let secondsSinceEpoch = Int64(floor(date.timeIntervalSince1970))
+            basePath.append(",\(secondsSinceEpoch)")
         }
         return basePath
     }

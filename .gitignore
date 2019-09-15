@@ -5,3 +5,4 @@
 xcuserdata/
 DerivedData/
 ResultBundle.xcresult
+Tests/HPDarkSkyTests/TestSecret.swift

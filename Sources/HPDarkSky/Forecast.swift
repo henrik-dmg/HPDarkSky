@@ -10,7 +10,7 @@ import Foundation
 public struct Forecast<T: Equatable & Codable>: Codable, Equatable {
     ///A human-readable text summary of this data point.
     ///(This property has millions of possible values, so don’t use it for automated purposes: use the icon property, instead!)
-    public let summary: String
-    public let icon: WeatherIcon
+    public let summary: String?
+    public let icon: WeatherIcon?
     public let data: [T]
 }

@@ -15,7 +15,10 @@ final class HPDarkSkyTests: XCTestCase {
         return DarkSkyRequest(
             secret: envSecret,
             location: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
-            excludedFields: [])
+            date: Date(),
+            excludedFields: [],
+            units: .metric,
+            language: .bengali)
     }
 
     func testSecretExistsInEnvironment() {
