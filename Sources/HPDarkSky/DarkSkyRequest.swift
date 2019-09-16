@@ -34,23 +34,24 @@ public struct DarkSkyRequest {
     }
 
     ///Constructs the URL to request
-    internal func makeURL() -> URL? {
+    internal func makeURL() -> URL {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.darksky.net"
         components.path = makeURLPath()
         components.queryItems = makeQueryItems()
-        return components.url
+        return components.url!
     }
 
     ///Construct the URL path with the API secret, location and if applicable the date in seconds since epoch
     private func makeURLPath() -> String {
-        var basePath = "/forecast/\(secret)/\(location.latitude),\(location.longitude)"
+        let basePath = "/forecast/\(secret)/"
+        var pathParams = ["\(location.latitude)", "\(location.longitude)"]
         if let date = date {
             let secondsSinceEpoch = Int64(floor(date.timeIntervalSince1970))
-            basePath.append(",\(secondsSinceEpoch)")
+            pathParams.append("\(secondsSinceEpoch)")
         }
-        return basePath
+        return basePath.appending(pathParams.joined(separator: ","))
     }
 
     ///Constructs the additional query items, such as units, excluded fields and language
@@ -81,9 +82,6 @@ public extension URLSession {
     ///Creates a task that retrieves the contents of the specified request,
     ///then calls a handler upon completion.
     func dataTask(with request: DarkSkyRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask? {
-        guard let url = request.makeURL() else {
-            return nil
-        }
-        return self.dataTask(with: url, completionHandler: completionHandler)
+        return self.dataTask(with: request.makeURL(), completionHandler: completionHandler)
     }
 }

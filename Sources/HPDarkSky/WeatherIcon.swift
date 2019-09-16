@@ -71,8 +71,6 @@ public extension WeatherIcon {
             iconName = "cloud.bolt"
         case .tornado:
             return UIImage(systemName: "tornado")!
-        @unknown default:
-            return UIImage(systemName: "globe")!
         }
 
         if filled { iconName.append(".fill") }

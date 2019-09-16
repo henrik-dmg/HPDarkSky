@@ -3,19 +3,8 @@ import CoreLocation
 @testable import HPDarkSky
 
 final class CodableTests: XCTestCase {
-    var encoder: JSONEncoder {
-        let encoder = JSONEncoder()
-        encoder.dataEncodingStrategy = .deferredToData
-        //encoder.dateEncodingStrategy = .secondsSince1970
-        return encoder
-    }
-
-    var decoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.dataDecodingStrategy = .deferredToData
-        //decoder.dateDecodingStrategy = .secondsSince1970
-        return decoder          
-    }
+    let encoder = JSONEncoder()
+    let decoder = JSONDecoder()
 
     func testAlertCodable() throws {
         let alert = Alert(
@@ -116,6 +105,8 @@ final class CodableTests: XCTestCase {
         let data = try encoder.encode(current)
         let loaded = try decoder.decode(CurrentDatapoint.self, from: data)
         XCTAssertEqual(current, loaded)
+        XCTAssertEqual(current.wind, loaded.wind)
+        XCTAssertEqual(current.precipitation, loaded.precipitation)
     }
     
     func testDailyDatapointCodable() throws {
@@ -124,9 +115,11 @@ final class CodableTests: XCTestCase {
         let data = try encoder.encode(datapoint)
         let loaded = try decoder.decode(DailyDatapoint.self, from: data)
         XCTAssertEqual(datapoint, loaded)
+        XCTAssertEqual(datapoint.wind, loaded.wind)
+        XCTAssertEqual(datapoint.precipitation, loaded.precipitation)
     }
 
-    func testMinutelyForecast() {
+    func testMinutelyForecast() throws {
         let datapoints = [
             MinutelyDatapoint(
                 time: Date(),
@@ -141,29 +134,34 @@ final class CodableTests: XCTestCase {
 
         let forecast = Forecast<MinutelyDatapoint>(summary: "asdasldas", icon: .cloudy, data: datapoints)
 
-        do {
-            let data = try encoder.encode(forecast)
-            let loaded = try decoder.decode(Forecast<MinutelyDatapoint>.self, from: data)
-            XCTAssertEqual(forecast, loaded)
-        } catch let err {
-            XCTFail(err.localizedDescription)
-        }
+        let data = try encoder.encode(forecast)
+        let loaded = try decoder.decode(Forecast<MinutelyDatapoint>.self, from: data)
+        XCTAssertEqual(forecast, loaded)
+        XCTAssertEqual(forecast.data.first?.precipitation, loaded.data.first?.precipitation)
     }
 
-    func testDailyForecast() {
+    func testDailyForecast() throws {
         let datapoints = [
             DailyDatapoint(apparentTemperatureHigh: 10, apparentTemperatureHighTime: Date(), apparentTemperatureLow: 10, apparentTemperatureLowTime: Date(), apparentTemperatureMax: 10.00, apparentTemperatureMaxTime: Date(), apparentTemperatureMin: 120312.1231, apparentTemperatureMinTime: Date(), moonPhase: 202.2, sunriseTime: Date(), sunsetTime: Date(), temperatureHigh: 202.2, temperatureHighTime: Date(), temperatureLow: 202.2, temperatureLowTime: Date(), temperatureMax: 202.2, temperatureMaxTime: Date(), temperatureMin: 202.2, temperatureMinTime: Date(), uvIndexTime: 202.2, cloudCover: 202.2, dewPoint: 202.2, humidity: 202.2, icon: .partlyCloudyDay, ozone: 202.2, pressure: 202.2, summary: "Generic summary", time: Date(), uvIndex: 10, visibility: 102312.2, windSpeed: 202.2, windGust: 202.2, windBearing: 356, windGustTime: nil, precipIntensity: 102312.2, precipIntensityError: 202.2, precipProbability: 102312.2, precipType: .snow, precipIntensityMax: nil, precipIntensityMaxTime: nil, precipAccumulation: 102312.2)
         ]
 
         let forecast = Forecast<DailyDatapoint>(summary: "asdasldas", icon: .cloudy, data: datapoints)
 
-        do {
-            let data = try encoder.encode(forecast)
-            let loaded = try decoder.decode(Forecast<DailyDatapoint>.self, from: data)
-            XCTAssertEqual(forecast, loaded)
-        } catch let err {
-            XCTFail(err.localizedDescription)
-        }
+        let data = try encoder.encode(forecast)
+        let loaded = try decoder.decode(Forecast<DailyDatapoint>.self, from: data)
+        XCTAssertEqual(forecast, loaded)
+    }
+    
+    func testHourlyForecast() throws {
+        let datapoint = HourlyDatapoint(apparentTemperature: 100, temperature: 1231, cloudCover: 12312.01, dewPoint: 102, humidity: 1203, icon: WeatherIcon.clearNight, ozone: 12, pressure: 2133, summary: "askdas", time: Date(), uvIndex: 1, visibility: 1320.2312, windSpeed: 2903, windGust: 021, windBearing: nil, windGustTime: nil, precipIntensity: 123, precipIntensityError: 2131.124102, precipProbability: 024.021, precipType: PrecipitationType.sleet, precipIntensityMax: 123, precipIntensityMaxTime: nil, precipAccumulation: nil)
+        
+        let forecast = Forecast<HourlyDatapoint>(summary: "asdasldas", icon: .cloudy, data: [datapoint])
+
+        let data = try encoder.encode(forecast)
+        let loaded = try decoder.decode(Forecast<HourlyDatapoint>.self, from: data)
+        XCTAssertEqual(forecast, loaded)
+        XCTAssertEqual(forecast.data.first?.wind, loaded.data.first?.wind)
+        XCTAssertEqual(forecast.data.first?.precipitation, loaded.data.first?.precipitation)
     }
 
     static var allTests = [
@@ -175,6 +173,7 @@ final class CodableTests: XCTestCase {
         ("testCurrentDatapointCodable", testCurrentDatapointCodable),
         ("testDailyDatapointCodable", testDailyDatapointCodable),
         ("testMinutelyForecast", testMinutelyForecast),
-        ("testDailyForecast", testDailyForecast)
+        ("testDailyForecast", testDailyForecast),
+        ("testHourlyForecast", testHourlyForecast)
     ]
 }

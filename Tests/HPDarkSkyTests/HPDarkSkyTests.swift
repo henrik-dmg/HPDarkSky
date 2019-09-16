@@ -5,21 +5,22 @@ import CoreLocation
 final class HPDarkSkyTests: XCTestCase {
 
     func makeRequestObject() -> DarkSkyRequest {
-        guard let envSecret = TestSecret.secret else {
-            print("--- Could not find API secret ---")
-            return DarkSkyRequest(
-                secret: "faulty-secret",
-                location: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
-                excludedFields: [])
-        }
         return DarkSkyRequest(
-            secret: envSecret,
+            secret: TestSecret.secret!,
             location: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
             date: Date(),
             excludedFields: [],
             units: .metric,
             language: .bengali)
     }
+    
+    let badRequest = DarkSkyRequest(
+        secret: TestSecret.secret!,
+        location: CLLocationCoordinate2D(latitude: 200, longitude: 300),
+        date: Date.distantFuture,
+        excludedFields: [],
+        units: .imperial,
+        language: .english)
 
     func testSecretExistsInEnvironment() {
         XCTAssertNotNil(TestSecret.secret, "Secret was not set as env variable")
@@ -38,6 +39,9 @@ final class HPDarkSkyTests: XCTestCase {
         XCTAssertFalse(crazyLocation.isValidLocation, "Location was falsely evaluated as valid")
         XCTAssertNil(anotherCrazyLocaiton, "Should not init with invalid coordinates")
         XCTAssertTrue(goodLocation.isValidLocation, "Location was falsely evaluated as invalid")
+        XCTAssertNil(CLLocationCoordinate2D.validated(latitude: 20000, longitude: 20000))
+        XCTAssertNotNil(CLLocationCoordinate2D.validated(latitude: 37.7749, longitude: -122.4194))
+        XCTAssertFalse(crazyLocation == goodLocation)
     }
 
     func testExcludingAll() {
@@ -78,10 +82,84 @@ final class HPDarkSkyTests: XCTestCase {
             XCTAssertNotNil(forecast.minutely, "Minutely forecast is missing")
             XCTAssertNotNil(forecast.hourly, "Hourly forecast is missing")
             XCTAssertNotNil(forecast.daily, "Daily forecast is missing")
+            XCTAssertEqual(forecast.timezone, TimeZone.init(abbreviation: "PDT")!)
             XCTAssertNil(error)
             exp.fulfill()
         }
 
+        waitForExpectations(timeout: 20, handler: nil)
+    }
+    
+    func testURLSessionExtension() {
+        let exp = expectation(description: "fetched current data from server")
+        
+        URLSession.shared.dataTask(with: makeRequestObject()) { data, response, error in
+            exp.fulfill()
+            XCTAssertNotNil(data)
+            XCTAssertNotNil(response)
+            XCTAssertNil(error)
+        }?.resume()
+        
+        waitForExpectations(timeout: 20, handler: nil)
+    }
+    
+    func testBadRequestFailing() {
+        let exp = expectation(description: "Retrieve no data")
+        
+        HPDarkSky.shared.performRequest(badRequest) { response, error in
+            exp.fulfill()
+            XCTAssertNil(response)
+            
+            do {
+                let err: NSError = try XCTUnwrap(error) as NSError
+                XCTAssert(err == NSError.invalidLocation)
+            } catch let unwrapError {
+                XCTFail(unwrapError.localizedDescription)
+            }
+        }
+        
+        waitForExpectations(timeout: 20, handler: nil)
+    }
+    
+    func testFactoryMethod() {
+        let exp = expectation(description: "fetched current data from server")
+        let location = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+        HPDarkSky.shared.secret = TestSecret.secret!
+        HPDarkSky.shared.requestWeather(forLocation: location) { (forecast, error) in
+            guard let forecast = forecast else {
+                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+                XCTFail("No forecast returned")
+                exp.fulfill()
+                return
+            }
+            XCTAssertNotNil(forecast.currently, "Current weather is missing")
+            XCTAssertNotNil(forecast.minutely, "Minutely forecast is missing")
+            XCTAssertNotNil(forecast.hourly, "Hourly forecast is missing")
+            XCTAssertNotNil(forecast.daily, "Daily forecast is missing")
+            XCTAssertEqual(forecast.location, location)
+            XCTAssertNil(error)
+            HPDarkSky.shared.secret = nil
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 20, handler: nil)
+    }
+    
+    func testSecretNotSet() {
+        let exp = expectation(description: "fetched current data from server")
+
+        HPDarkSky.shared.requestWeather(forLocation: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)) { response, error in
+            exp.fulfill()
+            XCTAssertNil(response)
+            
+            do {
+                let err: NSError = try XCTUnwrap(error) as NSError
+                XCTAssert(err == NSError.missingSecret)
+            } catch let unwrapError {
+                XCTFail(unwrapError.localizedDescription)
+            }
+        }
+        
         waitForExpectations(timeout: 20, handler: nil)
     }
 
@@ -89,6 +167,9 @@ final class HPDarkSkyTests: XCTestCase {
         ("testSecretExistsInEnvironment", testSecretExistsInEnvironment),
         ("testCrazyLocation", testCrazyLocation),
         ("testBasicRequest", testBasicRequest),
-        ("testExcludingAll", testExcludingAll)
+        ("testExcludingAll", testExcludingAll),
+        ("testBadRequestFailing", testBadRequestFailing),
+        ("testFactoryMethod", testFactoryMethod),
+        ("testSecretNotSet", testSecretNotSet)
     ]
 }

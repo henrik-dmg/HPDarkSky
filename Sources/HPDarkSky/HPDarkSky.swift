@@ -45,12 +45,12 @@ public final class HPDarkSky {
 
     ///Internal method for networking
     private func hitEndpoint(with request: DarkSkyRequest, completion: @escaping (DarkSkyResponse?, Error?) -> Void) {
-        guard request.location.isValidLocation, let url = request.makeURL() else {
+        guard request.location.isValidLocation else {
             completion(nil, NSError.invalidLocation)
             return
         }
 
-        URLSession.shared.dataTask(with: url) { data, _, error in
+        URLSession.shared.dataTask(with: request.makeURL()) { data, _, error in
             guard let json = data, error == nil else {
                 completion(nil, error)
                 return
@@ -74,19 +74,6 @@ public final class HPDarkSky {
         }.resume()
     }
 
-}
-
-// Felt cute, will delete later
-extension Data {
-    func json() -> [String: Any]? {
-        let model = try? JSONSerialization.jsonObject(with: self, options: [])
-
-        if let json = model as? [String: Any] {
-            return json
-        }
-
-        return nil
-    }
 }
 
 internal extension NSError {
