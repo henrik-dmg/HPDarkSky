@@ -6,7 +6,8 @@ import CoreLocation
 // TODO
 #endif
 
-@available(iOS 13, *)
+#if os(iOS) || os(tvOS)
+@available(iOS 13, tvOS 13, *)
 final class IconTests: XCTestCase {
     func testHollowIcon() {
         WeatherIcon.allCases.forEach { icon in
@@ -21,3 +22,4 @@ final class IconTests: XCTestCase {
         ("testHollowIcon", testHollowIcon)
     ]
 }
+#endif
