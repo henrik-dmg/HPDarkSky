@@ -15,4 +15,4 @@ jobs:
       run: |
         /usr/bin/xcodebuild -version
         swift -version
-        swift test
+        xcodebuild -scheme HPDarkSkyTests test
