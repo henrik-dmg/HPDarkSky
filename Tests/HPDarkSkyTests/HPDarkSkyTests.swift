@@ -145,6 +145,32 @@ final class HPDarkSkyTests: XCTestCase {
         waitForExpectations(timeout: 20, handler: nil)
     }
     
+    func testTimeMachineRequest() {
+        let exp = expectation(description: "fetched current data from server")
+        let location = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+        let date = Date()
+        HPDarkSky.shared.secret = TestSecret.secret!
+        HPDarkSky.shared.requestWeather(forLocation: location, date: date) { (forecast, error) in
+            guard let forecast = forecast else {
+                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+                XCTFail("No forecast returned")
+                exp.fulfill()
+                return
+            }
+            XCTAssertNotNil(forecast.currently, "Current weather is missing")
+            XCTAssertNotNil(forecast.minutely, "Minutely forecast is missing")
+            XCTAssertNotNil(forecast.hourly, "Hourly forecast is missing")
+            XCTAssertNotNil(forecast.daily, "Daily forecast is missing")
+            XCTAssertEqual(forecast.location, location)
+            XCTAssertEqual(forecast.currently?.time, date.removingMillisecondsFraction(), "Time was decoded incorrectly")
+            XCTAssertNil(error)
+            HPDarkSky.shared.secret = nil
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 20, handler: nil)
+    }
+    
     func testSecretNotSet() {
         let exp = expectation(description: "fetched current data from server")
 
@@ -172,4 +198,10 @@ final class HPDarkSkyTests: XCTestCase {
         ("testFactoryMethod", testFactoryMethod),
         ("testSecretNotSet", testSecretNotSet)
     ]
+}
+
+public extension Date {
+    public func removingMillisecondsFraction() -> Date {
+        return Date(timeIntervalSince1970: timeIntervalSince1970.rounded(.towardZero))
+    }
 }
