@@ -1,0 +1,642 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/CLLocationCoordinate2D+Equatable.swift",
+      "line": 33,
+      "symbol": "Double.isValidLatitude",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/CLLocationCoordinate2D+Equatable.swift",
+      "line": 37,
+      "symbol": "Double.isValidLongitude",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/CurrentDatapoint.swift",
+      "line": 20,
+      "symbol": "CurrentDatapoint.icon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/DailyDatapoint.swift",
+      "line": 10,
+      "symbol": "DailyDatapoint",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/DailyDatapoint.swift",
+      "line": 59,
+      "symbol": "DailyDatapoint.icon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/DarkSkyRequest.swift",
+      "line": 74,
+      "symbol": "ExcludableFields.currently",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/DarkSkyRequest.swift",
+      "line": 75,
+      "symbol": "ExcludableFields.minutely",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/DarkSkyRequest.swift",
+      "line": 76,
+      "symbol": "ExcludableFields.hourly",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/DarkSkyRequest.swift",
+      "line": 77,
+      "symbol": "ExcludableFields.daily",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/DarkSkyRequest.swift",
+      "line": 78,
+      "symbol": "ExcludableFields.alerts",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/DarkSkyResponse.swift",
+      "line": 11,
+      "symbol": "DarkSkyResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Forecast.swift",
+      "line": 10,
+      "symbol": "Forecast",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Forecast.swift",
+      "line": 14,
+      "symbol": "Forecast.icon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Forecast.swift",
+      "line": 15,
+      "symbol": "Forecast.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/HPDarkSky.swift",
+      "line": 18,
+      "symbol": "HPDarkSky.init(secret:language:units:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/HourlyDatapoint.swift",
+      "line": 10,
+      "symbol": "HourlyDatapoint",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/HourlyDatapoint.swift",
+      "line": 21,
+      "symbol": "HourlyDatapoint.icon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 12,
+      "symbol": "Language.arabic",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 13,
+      "symbol": "Language.azerbaijani",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 14,
+      "symbol": "Language.belarusian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 15,
+      "symbol": "Language.bulgarian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 16,
+      "symbol": "Language.bengali",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 17,
+      "symbol": "Language.bosnian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 18,
+      "symbol": "Language.catalan",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 19,
+      "symbol": "Language.czech",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 20,
+      "symbol": "Language.danish",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 21,
+      "symbol": "Language.german",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 22,
+      "symbol": "Language.greek",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 23,
+      "symbol": "Language.english",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 24,
+      "symbol": "Language.esperanto",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 25,
+      "symbol": "Language.spanish",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 26,
+      "symbol": "Language.estonian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 27,
+      "symbol": "Language.finnish",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 28,
+      "symbol": "Language.french",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 29,
+      "symbol": "Language.hebrew",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 30,
+      "symbol": "Language.hindi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 31,
+      "symbol": "Language.croatian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 32,
+      "symbol": "Language.hungarian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 33,
+      "symbol": "Language.indonesian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 34,
+      "symbol": "Language.icelandic",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 35,
+      "symbol": "Language.italian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 36,
+      "symbol": "Language.japanese",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 37,
+      "symbol": "Language.georgian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 38,
+      "symbol": "Language.kannada",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 39,
+      "symbol": "Language.korean",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 40,
+      "symbol": "Language.cornish",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 41,
+      "symbol": "Language.latvian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 42,
+      "symbol": "Language.malayam",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 43,
+      "symbol": "Language.marathi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 44,
+      "symbol": "Language.norwegianBokmål",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 45,
+      "symbol": "Language.dutch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 46,
+      "symbol": "Language.punjabi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 47,
+      "symbol": "Language.polish",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 48,
+      "symbol": "Language.portuguese",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 49,
+      "symbol": "Language.romanian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 50,
+      "symbol": "Language.russian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 51,
+      "symbol": "Language.slovak",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 52,
+      "symbol": "Language.slovenian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 53,
+      "symbol": "Language.serbian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 54,
+      "symbol": "Language.swedish",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 55,
+      "symbol": "Language.tamil",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 56,
+      "symbol": "Language.telugu",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 57,
+      "symbol": "Language.tetum",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 58,
+      "symbol": "Language.turkish",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 59,
+      "symbol": "Language.ukrainian",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 60,
+      "symbol": "Language.urdu",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 61,
+      "symbol": "Language.simplifiedChinese",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Language.swift",
+      "line": 62,
+      "symbol": "Language.traditionalChinese",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/MinutelyDatapoint.swift",
+      "line": 10,
+      "symbol": "MinutelyDatapoint",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Precipitation.swift",
+      "line": 31,
+      "symbol": "PrecipitationType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 12,
+      "symbol": "WeatherIcon.clearDay",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 13,
+      "symbol": "WeatherIcon.clearNight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 14,
+      "symbol": "WeatherIcon.partlyCloudyDay",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 15,
+      "symbol": "WeatherIcon.partlyCloudyNight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 16,
+      "symbol": "WeatherIcon.cloudy",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 17,
+      "symbol": "WeatherIcon.rain",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 18,
+      "symbol": "WeatherIcon.sleet",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 19,
+      "symbol": "WeatherIcon.snow",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 20,
+      "symbol": "WeatherIcon.wind",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 21,
+      "symbol": "WeatherIcon.fog",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 22,
+      "symbol": "WeatherIcon.hail",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 23,
+      "symbol": "WeatherIcon.thunderstorm",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherIcon.swift",
+      "line": 24,
+      "symbol": "WeatherIcon.tornado",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherUnits.swift",
+      "line": 10,
+      "symbol": "WeatherUnits",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherUnits.swift",
+      "line": 11,
+      "symbol": "WeatherUnits.imperial",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherUnits.swift",
+      "line": 12,
+      "symbol": "WeatherUnits.metric",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/WeatherUnits.swift",
+      "line": 14,
+      "symbol": "WeatherUnits.default",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Wind.swift",
+      "line": 12,
+      "symbol": "Wind.speed",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Wind.swift",
+      "line": 13,
+      "symbol": "Wind.gust",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Wind.swift",
+      "line": 14,
+      "symbol": "Wind.bearing",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/henrikpanhans/Xcode/HPDarkSky/Sources/HPDarkSky/Wind.swift",
+      "line": 15,
+      "symbol": "Wind.gustTime",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/henrikpanhans/Xcode/HPDarkSky"
+}
