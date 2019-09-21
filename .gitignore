@@ -7,3 +7,4 @@ DerivedData/
 ResultBundle.xcresult
 Tests/HPDarkSkyTests/TestSecret.swift
 HPDarkSkyTests.xctest.coverage.txt
+docs
