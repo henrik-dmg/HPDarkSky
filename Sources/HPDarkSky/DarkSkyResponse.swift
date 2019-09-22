@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 
+/// Type holding any information that is returned by the API
 public struct DarkSkyResponse: Codable, Equatable {
     ///A flags object containing miscellaneous metadata about the request.
     public let flags: Flags
@@ -35,7 +36,7 @@ public struct DarkSkyResponse: Codable, Equatable {
     let latitude: Double
     let timezoneIdentifier: String
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case currently
         case minutely
         case hourly

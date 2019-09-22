@@ -24,7 +24,7 @@ public struct Alert: Codable, Equatable {
     ///The severity of the weather alert
     public let severity: AlertSeverity
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case title
         case timeStamp = "time"
         case expires

@@ -201,7 +201,7 @@ final class HPDarkSkyTests: XCTestCase {
 }
 
 public extension Date {
-    public func removingMillisecondsFraction() -> Date {
+    func removingMillisecondsFraction() -> Date {
         return Date(timeIntervalSince1970: timeIntervalSince1970.rounded(.towardZero))
     }
 }

@@ -18,12 +18,21 @@ public struct DarkSkyRequest {
     public var language: Language = .english
     ///The units to be used in the response's data
     public var units: WeatherUnits = .metric
-    ///An optional date to perform a Time Machine request
+    ///An optional date to perform a Time Machine request.
+    ///Please note that before constructing the URL, the milliseconds fraction will be shaved
+    ///off and rounded down toward zero
     public var date: Date?
     ///The required API secret
     private let secret: String
 
-    ///Constructs a new request object
+    /// Constructs a new request object
+    /// - Parameter secret: DarkSky API secret key
+    /// - Parameter location: The location to request the weather for
+    /// - Parameter date: The date in time for which the data is requested,
+    /// if nil this will default to the current date
+    /// - Parameter excludedFields: Array specifying any fields that should be excluded from the response
+    /// - Parameter units: The units that should be used to format the data in the response
+    /// - Parameter language: The language that should be used in the response, e.g. for daily summaries
     public init(secret: String, location: CLLocationCoordinate2D, date: Date? = nil, excludedFields: [ExcludableFields] = [], units: WeatherUnits = .metric, language: Language = .english) {
         self.secret = secret
         self.date = date
@@ -71,10 +80,15 @@ public struct DarkSkyRequest {
 
 ///Enum to exclude certain fields from the weather response
 public enum ExcludableFields: String, RawRepresentable, CaseIterable {
+    ///Excludes the "Current" data field from the request
     case currently
+    ///Excludes the "Minutely" data field from the request
     case minutely
+    ///Excludes the "Hourly" data field from the request
     case hourly
+    ///Excludes the "Daily" data field from the request
     case daily
+    ///Excludes the "Alerts" data field from the request
     case alerts
 }
 

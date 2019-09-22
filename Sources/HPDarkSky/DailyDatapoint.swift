@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A datapoint that holds information about the average daily weather conditions
 public struct DailyDatapoint: Codable, Equatable {
     /// The daytime high apparent temperature.
     public let apparentTemperatureHigh: Double
@@ -56,6 +57,7 @@ public struct DailyDatapoint: Codable, Equatable {
     public let dewPoint: Double
     ///The relative humidity, between 0 and 1, inclusive.
     public let humidity: Double
+    ///A weather icon representing the associated weather conditions
     public let icon: WeatherIcon
     ///The columnar density of total atmospheric ozone at the given time in Dobson units.
     public let ozone: Double

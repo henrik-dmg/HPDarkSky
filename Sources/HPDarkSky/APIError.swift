@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct APIError: Codable, Equatable {
+internal struct APIError: Codable, Equatable {
     let code: Int
     let error: String
 
