@@ -9,3 +9,4 @@ Tests/HPDarkSkyTests/TestSecret.swift
 HPDarkSkyTests.xctest.coverage.txt
 docs
 hpdarksky.panhans.dev
+update-documentation-site.sh
