@@ -9,18 +9,31 @@ import Foundation
 
 /// An enum providing native system icons based on the API response
 public enum WeatherIcon: String, Codable, CaseIterable {
+    ///Clear conditions during daytime
     case clearDay = "clear-day"
+    ///Clear conditions during nighttime
     case clearNight = "clear-night"
+    ///Partly cloudy conditions during daytime
     case partlyCloudyDay = "partly-cloudy-day"
+    ///Partly cloudy conditions during nighttime
     case partlyCloudyNight = "partly-cloudy-night"
+    ///Cloudy conditions
     case cloudy
+    ///Rainy conditions
     case rain
+    ///Sleety conditions
     case sleet
+    ///Snowy conditions
     case snow
+    ///Windy conditions
     case wind
+    ///Foggy conditions
     case fog
+    ///Hailing conditions
     case hail
+    ///A thunderstorm
     case thunderstorm
+    ///A tornado, who would have thought that
     case tornado
 }
 

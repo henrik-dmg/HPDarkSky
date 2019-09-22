@@ -7,6 +7,7 @@
 
 import Foundation
 
+///Type holding information about minutely precipiation
 public struct MinutelyDatapoint: Codable, Equatable {
     ///The UNIX time at which this data point begins. minutely data point are always aligned to the top of the minute,
     ///hourly data point objects to the top of the hour,

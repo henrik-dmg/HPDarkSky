@@ -28,6 +28,7 @@ public struct Precipitation: Codable, Equatable {
     public let accumulation: Double?
 }
 
+///Enum specifying the type of precipitation
 public enum PrecipitationType: String, Codable, Equatable {
     ///Self-explanatory
     case rain

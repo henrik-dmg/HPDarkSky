@@ -1,10 +1,13 @@
 import Foundation
 import CoreLocation
 
-///A type which can conveniently request and handle weather data
+///Type that handles making requests and decoding the returned response into a usable format
 public final class HPDarkSky {
+    
+    ///Typealias for an optional forecast and error returned by the API
+    public typealias APIResponse = (DarkSkyResponse?, Error?) -> Void
 
-    ///A shared weather client
+    ///A shared weather client, with the secret defaulting to nil
     public static let shared = HPDarkSky(secret: nil)
     ///The attribution URL required by DarkSky
     public static let attributionURL = URL(string: "https://darksky.net/poweredby/")!
@@ -14,7 +17,11 @@ public final class HPDarkSky {
     public var units: WeatherUnits = .metric
     ///The API secret needed to make requests, obtain one [here](https://darksky.net/dev/register)
     public var secret: String?
-
+    
+    /// Inits a new weather client with the passed in properties
+    /// - Parameter secret: The DarkSky API secret key required to get a response
+    /// - Parameter units: The units that should be used to format the data in the response
+    /// - Parameter language: The language that should be used in the response, e.g. for daily summaries
     public init(secret: String?, language: Language = .english, units: WeatherUnits = .metric) {
         self.secret = secret
         self.language = language
@@ -24,16 +31,17 @@ public final class HPDarkSky {
     /// Performs a pre-specified request and returns the result
     /// - Parameter request: The request that will be used to fetch weather data
     /// - Parameter completion: The completion handler which returns an error or forecast
-    public func performRequest(_ request: DarkSkyRequest, completion: @escaping (DarkSkyResponse?, Error?) -> Void) {
+    public func performRequest(_ request: DarkSkyRequest, completion: @escaping APIResponse) {
         hitEndpoint(with: request, completion: completion)
     }
 
     /// Requests the weather forecast for the specified location
     /// - Parameter location: The location the weather is requested for
     /// - Parameter excludedFields: The fields that will be excluded from the request
-    /// - Parameter date: The timestamp for the request, can either be in the future or in the past (default is current)
+    /// - Parameter date: The timestamp for the request,
+    /// can either be in the future or in the past (default is current)
     /// - Parameter completion: The completion handler which returns an error or forecast
-    public func requestWeather(forLocation location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = [], date: Date? = nil, completion: @escaping (DarkSkyResponse?, Error?) -> Void) {
+    public func requestWeather(forLocation location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = [], date: Date? = nil, completion: @escaping APIResponse) {
         guard let secret = self.secret else {
             completion(nil, NSError.missingSecret)
             return
@@ -44,7 +52,7 @@ public final class HPDarkSky {
     }
 
     ///Internal method for networking
-    private func hitEndpoint(with request: DarkSkyRequest, completion: @escaping (DarkSkyResponse?, Error?) -> Void) {
+    private func hitEndpoint(with request: DarkSkyRequest, completion: @escaping APIResponse) {
         guard request.location.isValidLocation else {
             completion(nil, NSError.invalidLocation)
             return
