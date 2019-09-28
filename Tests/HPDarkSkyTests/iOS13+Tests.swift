@@ -17,7 +17,7 @@ final class IconTests: XCTestCase {
             XCTAssertNotNil(filled)
         }
     }
-    
+
     static var allTests = [
         ("testHollowIcon", testHollowIcon)
     ]

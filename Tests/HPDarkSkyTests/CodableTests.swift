@@ -30,19 +30,19 @@ final class CodableTests: XCTestCase {
 
         XCTAssertEqual(apiError, loaded)
     }
-    
+
     func testPrecipitationCodable() throws {
         let precip = Precipitation(intensity: 100, error: nil, probability: 86, type: .sleet, maxIntensity: 300, maxIntensityTime: Date.distantPast, accumulation: 1200)
-        
+
         let data = try encoder.encode(precip)
         let loaded = try decoder.decode(Precipitation.self, from: data)
 
         XCTAssertEqual(precip, loaded)
     }
-    
+
     func testWindCodable() throws {
         let wind = Wind(speed: 1231.213, gust: 1231.00, bearing: 912, gustTime: Date.distantPast)
-        
+
         let data = try encoder.encode(wind)
         let loaded = try decoder.decode(Wind.self, from: data)
 
@@ -53,7 +53,7 @@ final class CodableTests: XCTestCase {
         struct Wrapper: Codable, Equatable {
             let icon: WeatherIcon
         }
-        
+
         try WeatherIcon.allCases.forEach { icon in
             let wrap = Wrapper(icon: icon)
             let data = try encoder.encode(wrap)
@@ -62,12 +62,12 @@ final class CodableTests: XCTestCase {
             XCTAssertEqual(wrap, loaded)
         }
     }
-    
+
     func testLanguageCodable() throws {
         struct Wrapper: Codable, Equatable {
             let lang: Language
         }
-        
+
         try Language.allCases.forEach { lang in
             let wrap = Wrapper(lang: lang)
             let data = try encoder.encode(wrap)
@@ -108,7 +108,7 @@ final class CodableTests: XCTestCase {
         XCTAssertEqual(current.wind, loaded.wind)
         XCTAssertEqual(current.precipitation, loaded.precipitation)
     }
-    
+
     func testDailyDatapointCodable() throws {
         let datapoint = DailyDatapoint(apparentTemperatureHigh: 10.9123, apparentTemperatureHighTime: Date(), apparentTemperatureLow: 10.9123, apparentTemperatureLowTime: Date(), apparentTemperatureMax: 10.00, apparentTemperatureMaxTime: Date(), apparentTemperatureMin: 120312.1231, apparentTemperatureMinTime: Date(), moonPhase: 202.2, sunriseTime: Date(), sunsetTime: Date(), temperatureHigh: 202.2, temperatureHighTime: Date(), temperatureLow: 202.2, temperatureLowTime: Date(), temperatureMax: 202.2, temperatureMaxTime: Date(), temperatureMin: 202.2, temperatureMinTime: Date(), uvIndexTime: 202.2, cloudCover: 202.2, dewPoint: 202.2, humidity: 202.2, icon: .partlyCloudyDay, ozone: 202.2, pressure: 202.2, summary: "Generic summary", time: Date(), uvIndex: 8, visibility: 102312.2, windSpeed: 202.2, windGust: 202.2, windBearing: 356, windGustTime: nil, precipIntensity: 102312.2, precipIntensityError: 202.2, precipProbability: 102312.2, precipType: .snow, precipIntensityMax: nil, precipIntensityMaxTime: nil, precipAccumulation: 102312.2)
 
@@ -151,10 +151,10 @@ final class CodableTests: XCTestCase {
         let loaded = try decoder.decode(Forecast<DailyDatapoint>.self, from: data)
         XCTAssertEqual(forecast, loaded)
     }
-    
+
     func testHourlyForecast() throws {
         let datapoint = HourlyDatapoint(apparentTemperature: 100, temperature: 1231, cloudCover: 12312.01, dewPoint: 102, humidity: 1203, icon: WeatherIcon.clearNight, ozone: 12, pressure: 2133, summary: "askdas", time: Date(), uvIndex: 1, visibility: 1320.2312, windSpeed: 2903, windGust: 021, windBearing: nil, windGustTime: nil, precipIntensity: 123, precipIntensityError: 2131.124102, precipProbability: 024.021, precipType: PrecipitationType.sleet, precipIntensityMax: 123, precipIntensityMaxTime: nil, precipAccumulation: nil)
-        
+
         let forecast = Forecast<HourlyDatapoint>(summary: "asdasldas", icon: .cloudy, data: [datapoint])
 
         let data = try encoder.encode(forecast)

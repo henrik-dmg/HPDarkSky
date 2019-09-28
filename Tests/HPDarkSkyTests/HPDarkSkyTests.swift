@@ -13,7 +13,7 @@ final class HPDarkSkyTests: XCTestCase {
             units: .metric,
             language: .bengali)
     }
-    
+
     let badRequest = DarkSkyRequest(
         secret: TestSecret.secret!,
         location: CLLocationCoordinate2D(latitude: 200, longitude: 300),
@@ -25,10 +25,10 @@ final class HPDarkSkyTests: XCTestCase {
     func testSecretExistsInEnvironment() {
         XCTAssertNotNil(TestSecret.secret, "Secret was not set as env variable")
     }
-    
+
     func testMakeAPIError() {
         let error = APIError(code: 420, error: "Some error message")
-        
+
         XCTAssertEqual(error.makeNSError().code, 420)
     }
 
@@ -89,27 +89,27 @@ final class HPDarkSkyTests: XCTestCase {
 
         waitForExpectations(timeout: 20, handler: nil)
     }
-    
+
     func testURLSessionExtension() {
         let exp = expectation(description: "fetched current data from server")
-        
+
         URLSession.shared.dataTask(with: makeRequestObject()) { data, response, error in
             exp.fulfill()
             XCTAssertNotNil(data)
             XCTAssertNotNil(response)
             XCTAssertNil(error)
         }?.resume()
-        
+
         waitForExpectations(timeout: 20, handler: nil)
     }
-    
+
     func testBadRequestFailing() {
         let exp = expectation(description: "Retrieve no data")
-        
+
         HPDarkSky.shared.performRequest(badRequest) { response, error in
             exp.fulfill()
             XCTAssertNil(response)
-            
+
             do {
                 let err: NSError = try XCTUnwrap(error) as NSError
                 XCTAssert(err == NSError.invalidLocation)
@@ -117,10 +117,10 @@ final class HPDarkSkyTests: XCTestCase {
                 XCTFail(unwrapError.localizedDescription)
             }
         }
-        
+
         waitForExpectations(timeout: 20, handler: nil)
     }
-    
+
     func testFactoryMethod() {
         let exp = expectation(description: "fetched current data from server")
         let location = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
@@ -141,10 +141,10 @@ final class HPDarkSkyTests: XCTestCase {
             HPDarkSky.shared.secret = nil
             exp.fulfill()
         }
-        
+
         waitForExpectations(timeout: 20, handler: nil)
     }
-    
+
     func testTimeMachineRequest() {
         let exp = expectation(description: "fetched current data from server")
         let location = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
@@ -167,17 +167,17 @@ final class HPDarkSkyTests: XCTestCase {
             HPDarkSky.shared.secret = nil
             exp.fulfill()
         }
-        
+
         waitForExpectations(timeout: 20, handler: nil)
     }
-    
+
     func testSecretNotSet() {
         let exp = expectation(description: "fetched current data from server")
 
         HPDarkSky.shared.requestWeather(forLocation: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)) { response, error in
             exp.fulfill()
             XCTAssertNil(response)
-            
+
             do {
                 let err: NSError = try XCTUnwrap(error) as NSError
                 XCTAssert(err == NSError.missingSecret)
@@ -185,7 +185,7 @@ final class HPDarkSkyTests: XCTestCase {
                 XCTFail(unwrapError.localizedDescription)
             }
         }
-        
+
         waitForExpectations(timeout: 20, handler: nil)
     }
 

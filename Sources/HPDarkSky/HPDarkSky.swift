@@ -3,7 +3,7 @@ import CoreLocation
 
 ///Type that handles making requests and decoding the returned response into a usable format
 public final class HPDarkSky {
-    
+
     ///Typealias for an optional forecast and error returned by the API
     public typealias APIResponse = (DarkSkyResponse?, Error?) -> Void
 
@@ -17,7 +17,7 @@ public final class HPDarkSky {
     public var units: WeatherUnits = .metric
     ///The API secret needed to make requests, obtain one [here](https://darksky.net/dev/register)
     public var secret: String?
-    
+
     /// Inits a new weather client with the passed in properties
     /// - Parameter secret: The DarkSky API secret key required to get a response
     /// - Parameter units: The units that should be used to format the data in the response
