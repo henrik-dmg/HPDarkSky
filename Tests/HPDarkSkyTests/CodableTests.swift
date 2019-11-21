@@ -6,6 +6,16 @@ final class CodableTests: XCTestCase {
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
 
+    func makeRequestObject() -> DarkSkyRequest {
+        return DarkSkyRequest(
+            secret: TestSecret.secret!,
+            location: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+            date: Date(),
+            excludedFields: [],
+            units: .metric,
+            language: .german)
+    }
+
     func testAlertCodable() throws {
         let alert = Alert(
             title: "Mock",
@@ -162,6 +172,45 @@ final class CodableTests: XCTestCase {
         XCTAssertEqual(forecast, loaded)
         XCTAssertEqual(forecast.data.first?.wind, loaded.data.first?.wind)
         XCTAssertEqual(forecast.data.first?.precipitation, loaded.data.first?.precipitation)
+    }
+
+    func testFlags() throws {
+        let flags = Flags(units: .metric, sources: [], nearestStation: 123.123)
+
+        let data = try encoder.encode(flags)
+        let loaded = try decoder.decode(Flags.self, from: data)
+
+        XCTAssertEqual(flags, loaded)
+    }
+
+    func testResponse() {
+        let request = makeRequestObject()
+        let exp = expectation(description: "fetched current data from server")
+
+        HPDarkSky.shared.performRequest(request) { (forecast, error) in
+            guard let forecast = forecast else {
+                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+                XCTFail("No forecast returned")
+                exp.fulfill()
+                return
+            }
+            exp.fulfill()
+
+            do {
+                let data = try self.encoder.encode(forecast)
+                let loaded = try self.decoder.decode(DarkSkyResponse.self, from: data)
+
+                XCTAssertEqual(forecast.currently, loaded.currently)
+                XCTAssertEqual(forecast.flags, loaded.flags)
+                XCTAssertEqual(forecast.hourly, loaded.hourly)
+                XCTAssertEqual(forecast.daily, loaded.daily)
+                XCTAssertEqual(forecast.alerts, loaded.alerts)
+            } catch let error {
+                XCTFail(error.localizedDescription)
+            }
+        }
+
+        waitForExpectations(timeout: 20, handler: nil)
     }
 
     static var allTests = [
