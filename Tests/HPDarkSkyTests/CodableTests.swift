@@ -21,7 +21,7 @@ final class CodableTests: XCTestCase {
             title: "Mock",
             timeStamp: Date.distantPast,
             expires: Date.distantFuture,
-            description: "Mock descriptio",
+            description: "Mock description",
             url: URL(string: "https://google.com")!,
             affectedRegions: ["europe"],
             severity: .warning)
@@ -120,7 +120,7 @@ final class CodableTests: XCTestCase {
     }
 
     func testDailyDatapointCodable() throws {
-        let datapoint = DailyDatapoint(apparentTemperatureHigh: 10.9123, apparentTemperatureHighTime: Date(), apparentTemperatureLow: 10.9123, apparentTemperatureLowTime: Date(), apparentTemperatureMax: 10.00, apparentTemperatureMaxTime: Date(), apparentTemperatureMin: 120312.1231, apparentTemperatureMinTime: Date(), moonPhase: 202.2, sunriseTime: Date(), sunsetTime: Date(), temperatureHigh: 202.2, temperatureHighTime: Date(), temperatureLow: 202.2, temperatureLowTime: Date(), temperatureMax: 202.2, temperatureMaxTime: Date(), temperatureMin: 202.2, temperatureMinTime: Date(), uvIndexTime: 202.2, cloudCover: 202.2, dewPoint: 202.2, humidity: 202.2, icon: .partlyCloudyDay, ozone: 202.2, pressure: 202.2, summary: "Generic summary", time: Date(), uvIndex: 8, visibility: 102312.2, windSpeed: 202.2, windGust: 202.2, windBearing: 356, windGustTime: nil, precipIntensity: 102312.2, precipIntensityError: 202.2, precipProbability: 102312.2, precipType: .snow, precipIntensityMax: nil, precipIntensityMaxTime: nil, precipAccumulation: 102312.2)
+        let datapoint = DailyDatapoint(apparentTemperatureHigh: 10.91, apparentTemperatureHighTime: Date(), apparentTemperatureLow: 10.9123, apparentTemperatureLowTime: Date(), apparentTemperatureMax: 10.00, apparentTemperatureMaxTime: Date(), apparentTemperatureMin: 12.1231, apparentTemperatureMinTime: Date(), moonPhase: 202.2, sunriseTime: Date(), sunsetTime: Date(), temperatureHigh: 202.2, temperatureHighTime: Date(), temperatureLow: 202.2, temperatureLowTime: Date(), temperatureMax: 2.2, temperatureMaxTime: Date(), temperatureMin: 2.2, temperatureMinTime: Date(), uvIndexTime: 202.2, cloudCover: 202.2, dewPoint: 202.2, humidity: 202.2, icon: .partlyCloudyDay, ozone: 202.2, pressure: 202.2, summary: "Generic summary", time: Date(), uvIndex: 8, visibility: 12.2, windSpeed: 2.2, windGust: 2.2, windBearing: 356, windGustTime: nil, precipIntensity: 2.2, precipIntensityError: 202.2, precipProbability: 12.2, precipType: .snow, precipIntensityMax: nil, precipIntensityMaxTime: nil, precipAccumulation: 12.2)
 
         let data = try encoder.encode(datapoint)
         let loaded = try decoder.decode(DailyDatapoint.self, from: data)
