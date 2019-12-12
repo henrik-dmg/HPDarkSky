@@ -110,11 +110,12 @@ final class HPDarkSkyTests: XCTestCase {
             exp.fulfill()
             XCTAssertNil(response)
 
-            if let err = error as? NSError {
-                XCTAssert(err == NSError.invalidLocation)
-            } else {
+            guard let err = error else {
                 XCTFail("Could not unwrapt error")
+                return
             }
+
+            XCTAssert(err as NSError == NSError.invalidLocation)
         }
 
         waitForExpectations(timeout: 20, handler: nil)
@@ -177,11 +178,12 @@ final class HPDarkSkyTests: XCTestCase {
             exp.fulfill()
             XCTAssertNil(response)
 
-            if let err = error as? NSError {
-                XCTAssert(err == NSError.missingSecret)
-            } else {
+            guard let err = error else {
                 XCTFail("Could not unwrapt error")
+                return
             }
+
+            XCTAssert(err as NSError == NSError.missingSecret)
         }
 
         waitForExpectations(timeout: 20, handler: nil)
