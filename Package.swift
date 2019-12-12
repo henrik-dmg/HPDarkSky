@@ -8,6 +8,9 @@ let package = Package(
     platforms: [
         .macOS(.v10_13), .iOS(.v9), .watchOS(.v3), .tvOS(.v9)
     ],
+    products: [
+        .library(name: "HPDarkSky", targets: ["HPDarkSky"])
+    ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
