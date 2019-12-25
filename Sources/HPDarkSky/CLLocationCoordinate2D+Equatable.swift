@@ -15,7 +15,7 @@ extension CLLocationCoordinate2D: Equatable {
 }
 
 public extension CLLocationCoordinate2D {
-    /// Returns a 'safe' CLLocationCoordinate2D. Nil will be returned if either longitude or latitude are out of bounds
+    /// Returns a 'safe' CLLocationCoordinate2D. `Nil` will be returned if either longitude or latitude are out of bounds
     /// - Parameter latitude: The latitude passed into the coordinate instance
     /// - Parameter longitude: The longitude passed into the coordinate instance
     static func validated(latitude: Double, longitude: Double) -> CLLocationCoordinate2D? {

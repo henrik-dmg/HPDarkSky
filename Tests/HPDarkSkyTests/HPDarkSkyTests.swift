@@ -82,7 +82,6 @@ final class HPDarkSkyTests: XCTestCase {
             XCTAssertNotNil(forecast.minutely, "Minutely forecast is missing")
             XCTAssertNotNil(forecast.hourly, "Hourly forecast is missing")
             XCTAssertNotNil(forecast.daily, "Daily forecast is missing")
-            XCTAssertEqual(forecast.timezone, TimeZone.init(abbreviation: "PDT")!)
             XCTAssertNil(error)
             exp.fulfill()
         }
@@ -111,7 +110,7 @@ final class HPDarkSkyTests: XCTestCase {
             XCTAssertNil(response)
 
             guard let err = error else {
-                XCTFail("Could not unwrapt error")
+                XCTFail("Could not unwrap error")
                 return
             }
 

@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 /// Type holding any information that is returned by the API
-public struct DarkSkyResponse: Codable, Equatable {
+public struct DarkSkyResponse: Codable {
     ///A flags object containing miscellaneous metadata about the request.
     public let flags: Flags
     ///The requested location
