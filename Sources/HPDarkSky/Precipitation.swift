@@ -1,10 +1,3 @@
-//
-//  Precipitation.swift
-//  
-//
-//  Created by Henrik Panhans on 07.08.19.
-//
-
 import Foundation
 
 ///Type holding information about precipitation, such as snow/rain/etc.

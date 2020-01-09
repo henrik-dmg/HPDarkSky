@@ -1,10 +1,3 @@
-//
-//  DarkSkyRequest.swift
-//  
-//
-//  Created by Henrik Panhans on 06.08.19.
-//
-
 import Foundation
 import CoreLocation
 

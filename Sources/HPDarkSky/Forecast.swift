@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Henrik Panhans on 19.08.19.
-//
-
 import Foundation
 
 ///Generic type that can hold any type of data point, e.g. hourly or daily

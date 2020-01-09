@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Henrik Panhans on 16.09.19.
-//
-
 #if canImport(Combine)
 import Foundation
 import Combine

@@ -202,8 +202,8 @@ final class CodableTests: XCTestCase {
 
                 XCTAssertEqual(forecast.currently, loaded.currently)
                 XCTAssertEqual(forecast.flags, loaded.flags)
-                XCTAssertEqual(forecast.hourly, loaded.hourly)
-                XCTAssertEqual(forecast.daily, loaded.daily)
+                XCTAssertEqual(forecast.hourly, loaded.hourly, "Fix your rounding man")
+                XCTAssertEqual(forecast.daily, loaded.daily, "Fix your rounding man")
                 XCTAssertEqual(forecast.alerts, loaded.alerts)
             } catch let error {
                 XCTFail(error.localizedDescription)

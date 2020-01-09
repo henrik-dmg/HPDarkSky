@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Henrik Panhans on 10.08.19.
-//
-
 import Foundation
 
 ///A datapoint that holds basic information and also the current temperature

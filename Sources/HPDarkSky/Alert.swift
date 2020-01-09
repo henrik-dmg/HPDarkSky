@@ -1,10 +1,3 @@
-//
-//  Alert.swift
-//  
-//
-//  Created by Henrik Panhans on 09.08.19.
-//
-
 import Foundation
 
 /// Type holding information about weather alerts such as thunderstorms

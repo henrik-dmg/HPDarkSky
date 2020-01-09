@@ -1,10 +1,3 @@
-//
-//  WeatherIcon.swift
-//  
-//
-//  Created by Henrik Panhans on 10.08.19.
-//
-
 import Foundation
 
 /// An enum providing native system icons based on the API response

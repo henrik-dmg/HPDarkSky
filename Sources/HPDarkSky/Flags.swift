@@ -1,10 +1,3 @@
-//
-//  Flags.swift
-//  
-//
-//  Created by Henrik Panhans on 10.08.19.
-//
-
 import Foundation
 
 ///The flags object contains various metadata information related to the request

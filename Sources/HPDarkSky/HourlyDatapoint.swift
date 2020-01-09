@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Henrik Panhans on 10.08.19.
-//
-
 import Foundation
 
 ///Type holding information about hourly weather conditions, such as precipitation and temperature

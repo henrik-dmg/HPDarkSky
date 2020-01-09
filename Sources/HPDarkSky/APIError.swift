@@ -1,10 +1,3 @@
-//
-//  APIError.swift
-//  
-//
-//  Created by Henrik Panhans on 08.08.19.
-//
-
 import Foundation
 
 internal struct APIError: Codable, Equatable {

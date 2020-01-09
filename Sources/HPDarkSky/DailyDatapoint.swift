@@ -1,10 +1,3 @@
-//
-//  DailyForecast.swift
-//  
-//
-//  Created by Henrik Panhans on 09.08.19.
-//
-
 import Foundation
 
 /// A datapoint that holds information about the average daily weather conditions
