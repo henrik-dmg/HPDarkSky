@@ -69,7 +69,7 @@ public enum AlertSeverity: String, Codable, Equatable {
     }
 }
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 
 @available(iOS 13, tvOS 13, *)

@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.version      = "1.1.0"
   s.summary      = "Cross-platform framework to communicate with the DarkSky JSON API"
 
-  s.license      = { :type => "MIT", :file => "LICENSE.md" }
+  s.license      = "MIT"
   s.homepage     = "https://github.com/henrik-dmg/HPDarkSky"
 
   s.author             = { "henrik-dmg" => "henrik@panhans.dev" }
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.11"
   s.tvos.deployment_target = "9.0"
 
-  s.source       = { :git => 'https://github.com/henrik-dmg/HPDarkSky.git', :tag => "1.0.6" }
+  s.source       = { :git => 'https://github.com/henrik-dmg/HPDarkSky.git', :tag => "#{s.version}" }
 
   s.source_files = "Sources/**/*.swift"
   s.framework = "Foundation"
