@@ -4,7 +4,6 @@
 [![codebeat badge](https://codebeat.co/badges/f91a08f5-38ec-4d14-b25e-df2d380be4a4)](https://codebeat.co/projects/github-com-henrik-dmg-hpdarksky-master)
 [![Swift Version](https://img.shields.io/badge/Swift-5.1-orange)](https://img.shields.io/badge/Swift-5.1-orange)
 [![codecov](https://codecov.io/gh/henrik-dmg/HPDarkSky/branch/master/graph/badge.svg)](https://codecov.io/gh/henrik-dmg/HPDarkSky)
-[![Documentation Coverage](https://hpdarksky.panhans.dev/badge.svg)](https://hpdarksky.panhans.dev)
 
 HPDarkSky is a cross-platform Swift framework to fetch weather data from Dark Sky's JSON API. See their [documentation](https://darksky.net/dev) for further details.
 
@@ -21,7 +20,7 @@ To install HPDarkSky, either add the URL of this repository directly to your Xco
 
 ## Usage
 ### Basics
-To get started, you need an API key from Dark Sky ([register here](https://darksky.net/dev/register)). Then set your API key like this:
+To get started, you need an API key from Dark Sky ([register here](https://darksky.net/dev/register), NOTE: Apple recently aquired DarkSky and they will not be accepting new sign-ups anymore). Then set your API key like this:
 ```swift
 import HPDarkSky
 
@@ -35,7 +34,7 @@ For a list of supported languages see [Dark Sky's website](https://darksky.net/d
 ### Making a request
 ```swift
 let location = CLLocationCoordinate2D(latitude: 12.231, longitude: 69.420)
-HPDarkSky.shared.requestWeather(forLocation: location, exlcudedFields: [.hourly]) { response, error in
+HPDarkSky.shared.requestWeather(forLocation: location, exlcudedFields: [.hourly]) { result in
 	// Evaluate result here
 }
 ```

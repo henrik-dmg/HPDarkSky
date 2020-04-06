@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "HPDarkSky"
-  s.version      = "1.0.6"
+  s.version      = "1.1.0"
   s.summary      = "Cross-platform framework to communicate with the DarkSky JSON API"
 
   s.license      = { :type => "MIT", :file => "LICENSE.md" }
@@ -24,5 +24,7 @@ Pod::Spec.new do |s|
   s.tvos.framework = "UIKit"
   s.swift_version = "5.1"
   s.requires_arc = true
+
+  spec.dependency "HPNetwork"
 
 end
