@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
   s.swift_version = "5.1"
   s.requires_arc = true
 
-  spec.dependency "HPNetwork"
+  s.dependency "HPNetwork"
 
 end
