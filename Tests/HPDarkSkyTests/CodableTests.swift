@@ -187,14 +187,12 @@ final class CodableTests: XCTestCase {
         let request = makeRequestObject()
         let exp = expectation(description: "fetched current data from server")
 
-        HPDarkSky.shared.performRequest(request) { (forecast, error) in
-            guard let forecast = forecast else {
-                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+        HPDarkSky.shared.performRequest(request) { result in
+            exp.fulfill()
+            guard let forecast = try? result.get() else {
                 XCTFail("No forecast returned")
-                exp.fulfill()
                 return
             }
-            exp.fulfill()
 
             do {
                 let data = try self.encoder.encode(forecast)

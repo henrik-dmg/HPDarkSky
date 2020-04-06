@@ -45,13 +45,17 @@ final class HPDarkSkyTests: XCTestCase {
     }
 
     func testExcludingAll() {
-        var request = makeRequestObject()
-        request.excludedFields = ExcludableFields.allCases
+        let request = DarkSkyRequest(
+            secret: TestSecret.secret!,
+            location: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+            date: Date(),
+            excludedFields: ExcludableFields.allCases,
+            units: .metric,
+            language: .bengali)
         let exp = expectation(description: "fetched empty forecast from server")
 
-        HPDarkSky.shared.performRequest(request) { (forecast, error) in
-            guard let forecast = forecast else {
-                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+        HPDarkSky.shared.performRequest(request) { result in
+            guard let forecast = try? result.get() else {
                 XCTFail("No forecast returned")
                 exp.fulfill()
                 return
@@ -60,7 +64,6 @@ final class HPDarkSkyTests: XCTestCase {
             XCTAssertNil(forecast.minutely, "Minutely forecast not excluded")
             XCTAssertNil(forecast.hourly, "Hourly forecast not excluded")
             XCTAssertNil(forecast.daily, "Daily forecast not excluded")
-            XCTAssertNil(error)
             exp.fulfill()
         }
 
@@ -71,9 +74,8 @@ final class HPDarkSkyTests: XCTestCase {
         let request = makeRequestObject()
         let exp = expectation(description: "fetched current data from server")
 
-        HPDarkSky.shared.performRequest(request) { (forecast, error) in
-            guard let forecast = forecast else {
-                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+        HPDarkSky.shared.performRequest(request) { result in
+            guard let forecast = try? result.get() else {
                 XCTFail("No forecast returned")
                 exp.fulfill()
                 return
@@ -82,7 +84,6 @@ final class HPDarkSkyTests: XCTestCase {
             XCTAssertNotNil(forecast.minutely, "Minutely forecast is missing")
             XCTAssertNotNil(forecast.hourly, "Hourly forecast is missing")
             XCTAssertNotNil(forecast.daily, "Daily forecast is missing")
-            XCTAssertNil(error)
             exp.fulfill()
         }
 
@@ -105,16 +106,14 @@ final class HPDarkSkyTests: XCTestCase {
     func testBadRequestFailing() {
         let exp = expectation(description: "Retrieve no data")
 
-        HPDarkSky.shared.performRequest(badRequest) { response, error in
+        HPDarkSky.shared.performRequest(badRequest) { result in
             exp.fulfill()
-            XCTAssertNil(response)
 
-            guard let err = error else {
+            if case .failure(let err) = result {
+                XCTAssert(err as NSError == NSError.invalidLocation)
+            } else {
                 XCTFail("Could not unwrap error")
-                return
             }
-
-            XCTAssert(err as NSError == NSError.invalidLocation)
         }
 
         waitForExpectations(timeout: 20, handler: nil)
@@ -124,9 +123,8 @@ final class HPDarkSkyTests: XCTestCase {
         let exp = expectation(description: "fetched current data from server")
         let location = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
         HPDarkSky.shared.secret = TestSecret.secret!
-        HPDarkSky.shared.requestWeather(forLocation: location) { (forecast, error) in
-            guard let forecast = forecast else {
-                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+        HPDarkSky.shared.requestWeather(forLocation: location) { result in
+            guard let forecast = try? result.get() else {
                 XCTFail("No forecast returned")
                 exp.fulfill()
                 return
@@ -136,7 +134,6 @@ final class HPDarkSkyTests: XCTestCase {
             XCTAssertNotNil(forecast.hourly, "Hourly forecast is missing")
             XCTAssertNotNil(forecast.daily, "Daily forecast is missing")
             XCTAssertEqual(forecast.location, location)
-            XCTAssertNil(error)
             HPDarkSky.shared.secret = nil
             exp.fulfill()
         }
@@ -149,9 +146,8 @@ final class HPDarkSkyTests: XCTestCase {
         let location = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
         let date = Date()
         HPDarkSky.shared.secret = TestSecret.secret!
-        HPDarkSky.shared.requestWeather(forLocation: location, date: date) { (forecast, error) in
-            guard let forecast = forecast else {
-                XCTAssertNil(error, "Error was not nil, description: \(error!.localizedDescription)")
+        HPDarkSky.shared.requestWeather(forLocation: location, date: date) { result in
+            guard let forecast = try? result.get() else {
                 XCTFail("No forecast returned")
                 exp.fulfill()
                 return
@@ -162,7 +158,6 @@ final class HPDarkSkyTests: XCTestCase {
             XCTAssertNotNil(forecast.daily, "Daily forecast is missing")
             XCTAssertEqual(forecast.location, location)
             XCTAssertEqual(forecast.currently?.time, date.removingMillisecondsFraction(), "Time was decoded incorrectly")
-            XCTAssertNil(error)
             HPDarkSky.shared.secret = nil
             exp.fulfill()
         }
@@ -173,16 +168,14 @@ final class HPDarkSkyTests: XCTestCase {
     func testSecretNotSet() {
         let exp = expectation(description: "fetched current data from server")
 
-        HPDarkSky.shared.requestWeather(forLocation: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)) { response, error in
+        HPDarkSky.shared.requestWeather(forLocation: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)) { result in
             exp.fulfill()
-            XCTAssertNil(response)
 
-            guard let err = error else {
-                XCTFail("Could not unwrapt error")
-                return
+            if case .failure(let err) = result {
+                XCTAssert(err as NSError == NSError.missingSecret)
+            } else {
+                XCTFail("Could not unwrap error")
             }
-
-            XCTAssert(err as NSError == NSError.missingSecret)
         }
 
         waitForExpectations(timeout: 20, handler: nil)

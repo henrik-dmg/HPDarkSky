@@ -1,20 +1,38 @@
 import Foundation
 import CoreLocation
+import HPNetwork
 
 ///A request object to use with your own networking
-public struct DarkSkyRequest {
+public class DarkSkyRequest: DecodableRequest<DarkSkyResponse> {
+
+    // MARK: - DecodableRequest
+
+    public typealias Input = Data
+    public typealias Output = DarkSkyResponse
+
+    public override var decoder: JSONDecoder {
+        print("using decoder")
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        return decoder
+    }
+
+    public override var urlString: String {
+        makeURL().absoluteString
+    }
+
     ///An array of fields to be excluded in the response
-    public var excludedFields = [ExcludableFields]()
+    public let excludedFields: [ExcludableFields]
     ///The location to request weather data for
-    public var location: CLLocationCoordinate2D!
+    public let location: CLLocationCoordinate2D!
     ///The language to be used in the response's summary texts
-    public var language: Language = .english
+    public let language: Language
     ///The units to be used in the response's data
-    public var units: WeatherUnits = .metric
+    public let units: WeatherUnits
     ///An optional date to perform a Time Machine request.
     ///Please note that before constructing the URL, the milliseconds fraction will be shaved
     ///off and rounded down toward zero
-    public var date: Date?
+    public let date: Date?
     ///The required API secret
     private let secret: String
 
@@ -33,6 +51,7 @@ public struct DarkSkyRequest {
         self.location = location
         self.units = units
         self.language = language
+        super.init(urlString: "https://api.darksky.net")
     }
 
     ///Constructs the URL to request
@@ -53,7 +72,7 @@ public struct DarkSkyRequest {
             let secondsSinceEpoch = Int64(floor(date.timeIntervalSince1970))
             pathParams.append("\(secondsSinceEpoch)")
         }
-        return basePath.appending(pathParams.joined(separator: ","))
+        return basePath + pathParams.joined(separator: ",")
     }
 
     ///Constructs the additional query items, such as units, excluded fields and language
@@ -69,6 +88,7 @@ public struct DarkSkyRequest {
 
         return items
     }
+
 }
 
 ///Enum to exclude certain fields from the weather response

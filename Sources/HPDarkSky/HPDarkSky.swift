@@ -1,11 +1,12 @@
 import Foundation
 import CoreLocation
+import HPNetwork
 
 ///Type that handles making requests and decoding the returned response into a usable format
 public final class HPDarkSky {
 
     ///Typealias for an optional forecast and error returned by the API
-    public typealias APIResponse = (DarkSkyResponse?, Error?) -> Void
+    public typealias APIResponse = (Result<DarkSkyResponse, Error>) -> Void
 
     ///A shared weather client, with the secret defaulting to nil
     public static let shared = HPDarkSky(secret: nil)
@@ -31,8 +32,9 @@ public final class HPDarkSky {
     /// Performs a pre-specified request and returns the result
     /// - Parameter request: The request that will be used to fetch weather data
     /// - Parameter completion: The completion handler which returns an error or forecast
-    public func performRequest(_ request: DarkSkyRequest, completion: @escaping APIResponse) {
-        hitEndpoint(with: request, completion: completion)
+    @discardableResult
+    public func performRequest(_ request: DarkSkyRequest, completion: @escaping APIResponse) -> NetworkTask {
+        return hitEndpoint(with: request, completion: completion)
     }
 
     /// Requests the weather forecast for the specified location
@@ -41,45 +43,31 @@ public final class HPDarkSky {
     /// - Parameter date: The timestamp for the request,
     /// can either be in the future or in the past (default is current)
     /// - Parameter completion: The completion handler which returns an error or forecast
-    public func requestWeather(forLocation location: CLLocationCoordinate2D, excludedFields: [ExcludableFields] = [], date: Date? = nil, completion: @escaping APIResponse) {
+    @discardableResult
+    public func requestWeather(
+        forLocation location: CLLocationCoordinate2D,
+        excludedFields: [ExcludableFields] = [],
+        date: Date? = nil,
+        completion: @escaping APIResponse) -> NetworkTask
+    {
         guard let secret = self.secret else {
-            completion(nil, NSError.missingSecret)
-            return
+            completion(.failure(NSError.missingSecret))
+            return NetworkTask()
         }
 
         let request = DarkSkyRequest(secret: secret, location: location, date: date, excludedFields: excludedFields)
-        hitEndpoint(with: request, completion: completion)
+        return hitEndpoint(with: request, completion: completion)
     }
 
     ///Internal method for networking
-    private func hitEndpoint(with request: DarkSkyRequest, completion: @escaping APIResponse) {
+    @discardableResult
+    private func hitEndpoint(with request: DarkSkyRequest, completion: @escaping APIResponse) -> NetworkTask {
         guard request.location.isValidLocation else {
-            completion(nil, NSError.invalidLocation)
-            return
+            completion(.failure(NSError.invalidLocation))
+            return NetworkTask()
         }
 
-        URLSession.shared.dataTask(with: request.makeURL()) { data, _, error in
-            guard let json = data, error == nil else {
-                completion(nil, error)
-                return
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .secondsSince1970
-
-                if let apiError = try? decoder.decode(APIError.self, from: json) {
-                    completion(nil, apiError.makeNSError())
-                    return
-                }
-
-                let forecast = try decoder.decode(DarkSkyResponse.self, from: json)
-
-                completion(forecast, error)
-            } catch let parsingError {
-                completion(nil, parsingError)
-            }
-        }.resume()
+        return Network.shared.send(request, completion: completion)
     }
 
 }
