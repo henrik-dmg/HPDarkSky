@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.social_media_url   = "https://twitter.com/henrik_dmg"
 
   s.ios.deployment_target = "9.0"
-  s.watchos.deployment_target = "2.0"
-  s.osx.deployment_target = "10.10"
+  s.watchos.deployment_target = "3.0"
+  s.osx.deployment_target = "10.11"
   s.tvos.deployment_target = "9.0"
 
   s.source       = { :git => 'https://github.com/henrik-dmg/HPDarkSky.git', :tag => "1.0.6" }
