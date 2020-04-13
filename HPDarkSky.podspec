@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "HPDarkSky"
-  s.version      = "1.1.0"
+  s.version      = "1.2.0"
   s.summary      = "Cross-platform framework to communicate with the DarkSky JSON API"
 
   s.license      = "MIT"
