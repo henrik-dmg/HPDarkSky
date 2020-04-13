@@ -17,7 +17,7 @@ public class DarkSkyRequest: DecodableRequest<DarkSkyResponse> {
         return decoder
     }
 
-    public override var urlString: String {
+    public var urlString: String {
         makeURL().absoluteString
     }
 

@@ -67,7 +67,7 @@ public final class HPDarkSky {
             return NetworkTask()
         }
 
-        return Network.shared.send(request, completion: completion)
+        return Network.shared.dataTask(request, completion: completion)
     }
 
 }
